@@ -1,1 +1,1 @@
-# RS
+# Remote Sensing with QGIS
