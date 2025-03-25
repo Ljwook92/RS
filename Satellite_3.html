@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="J.I. Seo">
+<meta name="author" content="J.W. Lee">
+
+<title>6&nbsp; Satellite Image Classification 3 (QGIS) – Remote Sensing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Satellite_2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Satellite_3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Remote Sensing</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Remote Sensing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Satellite Image Classification (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lab" id="toc-lab" class="nav-link active" data-scroll-target="#lab"><span class="header-section-number">6.1</span> Lab</a>
+  <ul>
+  <li><a href="#define-band-set-for-image-classification" id="toc-define-band-set-for-image-classification" class="nav-link" data-scroll-target="#define-band-set-for-image-classification"><span class="header-section-number">6.1.1</span> Define Band Set for Image Classification</a></li>
+  <li><a href="#image-classification" id="toc-image-classification" class="nav-link" data-scroll-target="#image-classification"><span class="header-section-number">6.1.2</span> Image Classification</a>
+  <ul class="collapse">
+  <li><a href="#creating-the-training-input" id="toc-creating-the-training-input" class="nav-link" data-scroll-target="#creating-the-training-input"><span class="header-section-number">6.1.2.1</span> Creating the Training Input</a></li>
+  <li><a href="#create-the-area-of-interest-aoi" id="toc-create-the-area-of-interest-aoi" class="nav-link" data-scroll-target="#create-the-area-of-interest-aoi"><span class="header-section-number">6.1.2.2</span> Create the Area of Interest (AOI)</a></li>
+  <li><a href="#assess-the-spectral-signatures" id="toc-assess-the-spectral-signatures" class="nav-link" data-scroll-target="#assess-the-spectral-signatures"><span class="header-section-number">6.1.2.3</span> Assess the Spectral Signatures</a></li>
+  <li><a href="#create-a-classification-preview" id="toc-create-a-classification-preview" class="nav-link" data-scroll-target="#create-a-classification-preview"><span class="header-section-number">6.1.2.4</span> Create a Classification Preview</a></li>
+  <li><a href="#create-the-classification-output" id="toc-create-the-classification-output" class="nav-link" data-scroll-target="#create-the-classification-output"><span class="header-section-number">6.1.2.5</span> Create the Classification Output</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.I. Seo </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Gyeongguk National University
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.W. Lee </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lab" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="lab"><span class="header-section-number">6.1</span> Lab</h2>
+<section id="define-band-set-for-image-classification" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="define-band-set-for-image-classification"><span class="header-section-number">6.1.1</span> Define Band Set for Image Classification</h3>
+<ol type="1">
+<li><p><strong>SCP (Semi-Automatic Classification Plugin,</strong> <img src="images/Screenshot 2025-03-23 at 21.27.36.png" class="img-fluid" width="20">)을 클릭 후, 왼쪽 메뉴에서 <strong><code>Band set</code></strong>을 선택.</p>
+<p>아이콘을 클릭하여 잘라낸 반사율 이미지(clipped reflectance images)를 <strong>Single band list</strong>에 추가.</p>
+<p>버튼(<img src="images/Screenshot 2025-03-23 at 21.30.13.png" class="img-fluid" width="20">) 클릭하 우측에 있는 버튼 (<img src="images/Screenshot 2025-03-23 at 21.31.18.png" class="img-fluid" width="20">)을 클릭하여 QGIS에 로드 되어있는 반사율 이미지를 불러온다.</p></li>
+</ol>
+<p><img src="images/Screenshot 2025-03-23 at 21.37.14.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> 이때도 파일 순서를 오름차순으로 정렬할 것!</p>
+<p><strong><code>Band quick settings</code></strong>는 이전과 마찬가지로 Landsat 9 OLI [bands 1, 2, 3, 4, 5, 6, 7]으로 설정.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>설정이 끝난 후, <strong><code>RUN</code></strong>버튼을 누르지 말고, 좌측 하단에 있는 RGB 버튼(<img src="images/Screenshot 2025-03-23 at 21.42.31.png" class="img-fluid" width="20">)을 클릭하여 QGIS의 Layers에 추가되도록 한다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 21.44.06.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>생성된 <strong><code>Virtual Band Set 3</code></strong>를 클릭한 다음, 상단 RGB = 의 값을 <strong>4-3-2</strong>로 설정 후, 나머지 클립된 이미지들 체크 해제.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 21.47.56.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>선택한 밴드에 따라 지도에서 이미지 색상이 변하는 것을 아래와 같은 화면으로 확인할 수 있으며, <strong>식생(vegetation)은 빨간색으로 강조되어 표시된다.</strong></p>
+<p><img src="images/Screenshot 2025-03-23 at 21.51.52.png" class="img-fluid"></p>
+<ol start="4" type="1">
+<li>Virtual Band Set 3를 사람 눈에 보이는 자연색(Natural Colors)으로 표시하려면, 다시 RGB 설정에서 <strong>밴드 3, 밴드 2, 밴드 1</strong>을 각각 (RGB = 3-2-1)로 설정. 이때,
+<ul>
+<li>파란색(Blue) 파장은 <strong>레이어 1</strong>,</li>
+<li>녹색(Green) 파장은 <strong>레이어 2</strong>,</li>
+<li>빨간색(Red) 파장은 <strong>레이어 3</strong>에 해당.</li>
+</ul></li>
+</ol>
+<p><img src="images/Screenshot 2025-03-23 at 21.55.43.png" class="img-fluid"></p>
+</section>
+<section id="image-classification" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="image-classification"><span class="header-section-number">6.1.2</span> Image Classification</h3>
+<p>이미지 분류(Image Classification)는 원격 탐사(Remote Sensing) 분석에서 흔히 사용되는 방법이다. 이미지 분류의 목적은 <strong>이미지를 구성하는 픽셀을 각 픽셀이 나타내는 토지 피복 유형(land cover type)에 따라 지정된 그룹으로 구분</strong>하는 것이다. 이를 위해 분류기(classifier) 알고리즘을 적용하여 픽셀을 반사율(reflectance) 값에 따라 그룹화.</p>
+<p>여기서 시도할 분류 방법은 지도 분류(supervised classification). 지도 분류는 분석가가 이미지에서 추출한 픽셀 샘플을 바탕으로 시스템에 분광(spectral) 클래스를 식별하도록 학습시키는 방식이다. 각 토지 피복 클래스마다 충분한 샘플이 사용되어야 하며, 각 클래스는 서로 분광적으로 구별 가능해야 한다. <strong>즉, ‘숲’, ‘물’, ’도로’같은 클래스를 정했다면, 각 클래스를 대표하는 픽셀 샘플을 충분히 모아야 하며, 각 클래스의 픽셀이 특정 파장에서 반사하는 값(반사율, 여기서는 각 클래스 특징 색상)이 서로 달라야 한다.</strong></p>
+<p>샘플은 각 클래스의 대표 픽셀을 포함하는 폴리곤을 생성하여 만들고, 해당 픽셀의 정보를 서명(signature)으로 불러와 저장합니다. 예를 들어, <strong>‘숲’ 지역을 식별하려면 이미지에서 숲으로 보이는 부분을 선택하여 폴리곤을 생성합니다. 폴리곤 내부의 픽셀들은 다양한 파장에서 측정된 반사값을 가지고 있으며, 이러한 값들의 조합을 통해 해당 클래스의 서명(signature)이 만들어진다.</strong> 모든 토지 피복 클래스에 대한 샘플링이 완료되면, 파장(wavelength) 대 반사율(reflectance) 그래프에서 서명을 관찰하여 클래스 간 분리 가능성(separability)을 평가한다. 평가 결과에 따라 샘플을 조정해야 할 수도 있다. 이미지 분류의 최종 결과는 각 클래스에 해당하는 코드가 부여된 단일 밴드 래스터(single band raster) 이미지이다.</p>
+<section id="creating-the-training-input" class="level4" data-number="6.1.2.1">
+<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="creating-the-training-input"><span class="header-section-number">6.1.2.1</span> Creating the Training Input</h4>
+<p>SCP를 실행하면 QGIS 인터페이스의 왼쪽 하단 부분에서 Semi-Automatic Classification Dock을 찾을 수 있다 (빨간 네모).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 13.56.01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>만약 보이지 않는다면, SCP 메인 툴바에서 <strong>Show Plugin(플러그인 표시)</strong> 메뉴를 클릭.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.00.29.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>SCP dock의 왼쪽에는 세로로 정렬된 텍스트 탭 3개가 있다: <strong>Home, Training Input, 그리고 Classification.</strong></p>
+<ol type="1">
+<li>Training Input 클릭.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.03.15.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<ol start="2" type="1">
+<li><p>새로운 Training Input을 만들기 위해, 버튼(<img src="images/Screenshot 2025-03-24 at 14.04.16.png" class="img-fluid" width="20">) 클릭.</p>
+<p>저장 위치는 이전과 동일한 위치로 설정. 여기서 파일명은 training.scp로 지정(파일명은 임의로 수정가능).</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.06.34.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>생성한 training.scp는 QGIS의 Layers에 나타난걸 볼 수 있다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.07.42.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+</section>
+<section id="create-the-area-of-interest-aoi" class="level4" data-number="6.1.2.2">
+<h4 data-number="6.1.2.2" class="anchored" data-anchor-id="create-the-area-of-interest-aoi"><span class="header-section-number">6.1.2.2</span> Create the Area of Interest (AOI)</h4>
+<p>이제, 각 클래스(Class)와 매크로클래스(Macro-class)를 정의하는 ROI(Region of Interest, 관심 영역)를 생성할 것이다. 각 ROI는 클래스 ID(CID)로 식별되며, 각 ROI는 매크로클래스 ID(MCID)를 통해 특정 토지 피복 클래스(land cover class)에 할당된다.</p>
+<blockquote class="blockquote">
+<p><strong>매크로클래스(Macro-class)</strong>는 비슷한 성질을 가진 여러 하위 클래스(클래스들)를 묶어놓은 큰 그룹.</p>
+<p>예를 들어:</p>
+<p><strong>Macro-class ID (MCID): ‘산맥’</strong></p>
+<ul>
+<li>Class 1 (CID 1): 나무</li>
+<li>Class 2 (CID 2): 그림자 진 숲</li>
+<li>Class 3 (CID 3): 협곡</li>
+</ul>
+<p>위의 class 1~3은 모두 Macro-class 즉, 산맥이라는 큰 그룹안에 포함된다.</p>
+</blockquote>
+<p>매크로클래스는 서로 다른 분광 서명(spectral signatures)을 가진 여러 재료(material)로 구성됩니다. 좋은 분류 결과를 얻기 위해서는 같은 매크로클래스에 속하더라도 서로 다른 재료의 분광 서명을 구분해야 합니다. 따라서, 각 매크로클래스마다 여러 개의 ROI를 생성할 것이며, 이때 동일한 MCID를 사용하되 각 관심 영역(AOI)마다 다른 CID를 부여하게 된다.</p>
+<p>이번 실습에서는 아래와 같은 Macro-class ID를 사용한다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Macro-class name</th>
+<th style="text-align: center;">Macroclass ID (MCID)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Vegetation</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Bare Rock</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Water</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Snow</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Cloud</td>
+<td style="text-align: center;">5</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>ROI(관심 영역)는 다각형을 수동으로 그리거나 자동 영역 확장(region growing) 알고리즘을 사용하여 생성할 수 있다.<br>
+이미지의 왼쪽 하단에 있는 갈색 지역(노출된 암석 지대) 위로 지도를 확대 해보자.<br>
+이 영역 안에 ROI를 수동으로 생성하려면, QGIS 상단 <strong>작업 툴바(Working toolbar)</strong>에 있는 버튼(<img src="images/Screenshot 2025-03-24 at 14.31.31.png" class="img-fluid" width="20">)을 클릭.</li>
+</ol>
+<blockquote class="blockquote">
+<p>추가적으로 맵을 이동할 때는 QGIS 상단 툴바에서 아이콘(<img src="images/Screenshot 2025-03-24 at 15.15.13.png" class="img-fluid" width="20"> )으로 전환해서 쉽게 이동가능.</p>
+</blockquote>
+<p><img src="images/Screenshot 2025-03-24 at 14.32.21.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.46.25.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>해당 영역에서 마우스 왼쪽 클릭하여 ROI(관심 영역)의 꼭지점(vertex)을 정의하고, <strong>마지막 꼭지점을 정의할 때는 마우스 오른쪽 클릭하여 폴리곤을 닫는다.</strong> 이미지 위에는 주황색 반투명 폴리곤이 표시되며, 이것은 임시 폴리곤(Training input에 저장되지 않은 상태). 의도한 영역을 잘 커버할 때까지 임시 폴리곤을 여러 번 그릴 수 있으며, 이전에 그린 폴리곤은 새로 그릴 때마다 덮어쓰기 가능.</p>
+</blockquote>
+<ol type="1">
+<li><p>임시 폴리곤의 모양이 만족스럽다면, 이를 Training input에 저장.</p>
+<p><strong>Training input</strong> 창을 열어 클래스(Class)와 매크로클래스(Macroclass)를 정의.<br>
+<strong>ROI Signature list</strong>에서 다음과 같이 설정한다 (MCID는 이전 테이블에서 참고):</p>
+<ul>
+<li><p><strong>MC ID = 2</strong></p></li>
+<li><p><strong>MC Info = Bare rock</strong></p></li>
+<li><p><strong>C ID = 1</strong></p></li>
+<li><p><strong>C Info = Rock</strong></p></li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.47.02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>그런 다음, 오른쪽 하단에 있는 디스크 모양 버튼(<img src="images/Screenshot 2025-03-24 at 14.39.21.png" width="20" height="21">)을 클릭하여 ROI를 Training input에 저장. 몇 초 후, ROI가 상단의 <strong>ROI Signature list</strong>에 나타나며, <strong>Signature</strong>옵션이 선택된 상태였다면 분광 서명(spectral signature)이 자동으로 계산된다.</p>
+<blockquote class="blockquote">
+<p>저장된 ROI는 아래와 같이 검정색으로 변하고, CID를 보면, 자동으로 2로 설정된 것을 확인할 수 있다. MCID와는 다르게 CID는 자동으로 다음으로 숫자가 증가한다.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.47.30.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>이제 <strong>자동 영역 확장(automatic region growing) 알고리즘</strong>을 사용하여 <strong>물(water) 클래스</strong>에 대한 두 번째 ROI를 생성 해보자. 이미지의 중간 하단 영역을 확대하고, <strong><code>Working toolbar</code></strong>에서 <strong>Dist</strong> = 15로 설정.</li>
+</ol>
+<p><img src="images/Screenshot 2025-03-24 at 14.54.13.png" class="img-fluid"></p>
+<p><strong>자동 영역 확장</strong>은 다음 버튼(<img src="images/Screenshot 2025-03-24 at 14.55.49.png" class="img-fluid" width="20">)을 통해 실행할 수 있다. 확장 버튼을 클릭한 후, 지도 중간 하단에 있는 검은색 호수를 클릭.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 14.57.02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>해당 영역은 자동으로 비슷한 픽셀 값을 가진 영역을 선택 해주기 때문에, 매번 클릭할 때마다 랜덤으로 생성된다.</p>
+</blockquote>
+<p><strong>ROI Signature list</strong>에서 다음과 같이 설정하고, 저장:</p>
+<ul>
+<li><strong>MC ID = 3</strong></li>
+<li><strong>MC Info = Water</strong></li>
+<li><strong>C ID = 1</strong></li>
+<li><strong>C Info = Lake</strong></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.02.53.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>각 Macro-class 별로 임의로 지정 해보자. 지정이 끝나면 아래와 같은 리스트를 얻게 된다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.33.17.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+</section>
+<section id="assess-the-spectral-signatures" class="level4" data-number="6.1.2.3">
+<h4 data-number="6.1.2.3" class="anchored" data-anchor-id="assess-the-spectral-signatures"><span class="header-section-number">6.1.2.3</span> Assess the Spectral Signatures</h4>
+<p>분광 서명(Spectral signatures)은 <strong>분류 알고리즘(Classification Algorithms)</strong>이 이미지 픽셀에 라벨을 지정할 때 사용된다. 그러나 서로 다른 재질(material)이라도 비슷한 분광 서명을 가질 수 있다(특히 다중분광 이미지(multispectral images)의 경우). 예를 들어, <strong>도시 지역</strong>과 <strong>토양</strong>이 비슷한 분광 서명을 가질 수 있다.</p>
+<p>분류에 사용되는 분광 서명이 너무 유사하면, 알고리즘이 이를 올바르게 구분하지 못해 픽셀이 잘못 분류(misclassified)될 수 있기 때문에, <strong>분광 거리(Spectral Distance)</strong>를 평가하여 유사한 분광 서명을 찾아 제거하는 것이 필요하다. 물론, 거리(distance)의 개념은 사용하는 분류 알고리즘에 따라 달라질 수 있다.</p>
+<ol type="1">
+<li>분광 서명의 유사성을 간단히 평가하는 방법 중 하나는 <strong>Signature plot</strong>를 확인하는 것이다.<br>
+Signature plot을 보려면, <strong>ROI Signature list</strong>에서 두 개 이상의 분광 서명을 클릭해 선택한 후, 버튼(<img src="images/Screenshot 2025-03-24 at 15.40.28.png" class="img-fluid" width="20">)을 클릭하면 된다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.41.03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>위에처럼 분광 서명을 클릭한 후, <img src="images/Screenshot 2025-03-24 at 15.40.28.png" class="img-fluid" width="20"> 클릭.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.41.53.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>그래프 내에서 이동하거나 확대/축소를 하여 서명들이 서로 유사한지(즉, 선이 매우 가깝게 위치하는지) 확인할 수 있다.<br>
+그래프에 표시된 선의 색상을 변경하려면, <strong>Plot Signature list</strong>에서 해당 색상을 더블 클릭하면 된다.</p>
+</blockquote>
+<p>그래프에서 볼 수 있다시피, 분광 서명들이 서로 상당히 유사한 것을 알 수 있다. 이런 경우 분류가 잘 되지 않을 수 있다. (이상적인 분광서명 그래프는 아래와 같다.)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.44.54.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>그래프에서 각 서명의 선은 <strong>ROI Signature list</strong>에서 정의된 색상으로 표시되며, 각 밴드(band)의 분광 범위(최소값과 최대값)는 해당 서명의 선 색상과 동일한 반투명 영역으로 나타난다. 이 반투명 영역이 클수록 표준편차(standard deviation)가 크다는 의미이며, 이는 해당 서명을 구성하는 픽셀들의 이질성(heterogeneity)이 높다는 것을 의미한다.</p>
+<p>또한, 서로 유사한 분광 서명 간의 분광 유사도는 <strong>Plot Signature list</strong>에서 주황색으로 강조되어 표시되고, 서명 간의 <strong>Spectral distance</strong>를 계산할 수도 있다. 서명 간의 분광 거리를 계산하려면, <strong>Plot</strong> 테이블에서 두 개 이상의 분광 서명을 클릭하여 선택한다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.48.38.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>위의 이미지는, 각 서명 쌍(pair of signatures)에 대해 거리가 계산된 결과이다. 이제 <strong>Spectral distances(분광 거리)</strong> 탭을 열어보면, 서명 간의 유사성이 선택한 알고리즘에 따라 다르게 나타나는 것을 확인할 수 있다.</p>
+<p>예를 들어, 두 개의 서명이 Spectral Angle Mapping에서는 매우 유사하게 나타날 수 있다 (매우 낮은 분광 각도). 그러나 Maximum Likelihood(최대 우도법)에서는 두 서명이 상당히 멀리 떨어져 있을 수도 있다 (Jeffries-Matusita 거리 값이 2에 가까운 경우).</p>
+<p>서명 간 유사성은 사용 가능한 <strong>분광 밴드의 수</strong>에 따라 재질(material) 간 유사성에 영향을 받으며, 또한 우리가 <strong>ROI를 생성하는 방식</strong>도 서명에 영향을 줍니다. 서명의 구체적인 값, 표준편차, ROI 픽셀 수 등과 같은 세부 정보는 <strong>Signature details</strong> 창에서 확인할 수 있다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.51.57.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+</section>
+<section id="create-a-classification-preview" class="level4" data-number="6.1.2.4">
+<h4 data-number="6.1.2.4" class="anchored" data-anchor-id="create-a-classification-preview"><span class="header-section-number">6.1.2.4</span> Create a Classification Preview</h4>
+<p>분류(classification) 과정은 수집한 ROI(관심 영역)와 해당 분광 서명(spectral signatures)에 기반한다.<br>
+최종 분류를 실행하기 전에, <strong>분류 미리보기(Classification preview)</strong>를 생성해 결과를 평가하는 것이 유용하다. 이렇게 하면 분광 서명의 영향을 파악할 수 있으며, 결과가 좋지 않은 경우 더 많은 ROI를 수집해 토지 피복(land cover)을 보다 정확하게 분류할 수 있다.</p>
+<ol type="1">
+<li><p>분류(또는 미리보기)를 실행하기 전에, <strong>분류 래스터(classification raster)</strong>에 표시될 각 토지 피복 클래스의 색상을 설정.<br>
+<strong>ROI Signature list</strong>에서 각 ROI의 <strong>Color</strong> 열을 더블 클릭해 각 클래스의 대표 색상을 선택.</p></li>
+<li><p>또한, <strong>Macroclasses</strong> 테이블에서도 매크로클래스의 색상을 설정 함. (각자 원하는 색상 지정)</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 15.58.10.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li><p>분류 알고리즘을 선택. 이번 lab에서는 <strong>Maximum Likelihood(최대 우도법)</strong>을 사용.</p>
+<p>SCP(<img src="images/Screenshot 2025-03-24 at 16.02.57.png" class="img-fluid" width="20">)를 실행하여, Classification을 클릭. Input에서 <strong><code>Select input band Set</code></strong>은 현재 사용중인 band set과 동일하게 해야함. (왼쪽 Layers에 있는 band set 3와 우측 Input에 있는 band set 3로 통일) <strong><code>RUN</code>은 아직 클릭하지 않는다.</strong></p></li>
+</ol>
+<p><img src="images/Screenshot 2025-03-24 at 16.04.19.png" class="img-fluid"></p>
+<p>Classification 창을 끈 다음, QGIS 상단 툴바에서 Classification preview(<img src="images/Screenshot 2025-03-24 at 16.28.24.png" width="20" height="19">) 의 Size = 300으로 설정하고, 분류 전에 결과를 미리 확인.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 16.27.36.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>Size = 300으로 설정한 후, 지도에서 한 지점을 클릭. 클릭하면, 클릭지점을 중심으로 정사각형 형태의 결과가 생성됨. 미리보기(preview)는 임시 래스터(temporary raster)로, QGIS를 종료하면 삭제되며, QGIS 패널의 Layers(레이어)에 <strong>scp_class_temp_group</strong>라는 그룹에 저장된다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 16.31.37.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>이제 Macro-class를 나타내는 5가지 색상만 표시되는 것을 확인할 수 있다. 일반적으로, ROI(관심 영역)나 분광 서명(spectral signature)을 <strong>ROI Signature list</strong>에 추가할 때마다 분류 미리보기(classification preview)를 수행하는 것이 추천된다.</p>
+<p><strong>따라서 ROI 생성(Create the ROIs) 단계와 분류 미리보기 생성(Create a Classification Preview) 단계는 반복적(iterative)이고 동시에 진행되는(concurrent) 과정이어야 함.</strong></p>
+</section>
+<section id="create-the-classification-output" class="level4" data-number="6.1.2.5">
+<h4 data-number="6.1.2.5" class="anchored" data-anchor-id="create-the-classification-output"><span class="header-section-number">6.1.2.5</span> Create the Classification Output</h4>
+<p>분류 미리보기 결과가 만족스러웠다고 가정할 때(즉, 픽셀들이 <strong>ROI Signature list</strong>에 정의된 올바른 클래스에 할당된 경우), 이제 전체 이미지에 대한 실제 토지 피복 분류(land cover classification)를 수행 해보자.</p>
+<p>다시 <strong>Classification(분류)</strong> 탭으로 돌아가서, Using training을 Macro-class ID (MCID)를 체크, <strong>Classification output</strong>항목에서 버튼(<img src="images/Screenshot 2025-03-24 at 16.36.24.png" width="30" height="17">)을 클릭하여 분류 결과가 저장될 경로를 지정. 출력 파일은 <strong>래스터 파일(.tif)</strong> 형식으로 저장된다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1882317190.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>분류 결과는 다음과 같이 볼 수 있다.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Satellite_2.html" class="pagination-link" aria-label="Satellite Image Classification 2 (QGIS)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Data Science-Geospatial Lab, Jung-In Seo, Jeong-Wook Lee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Gyeongguk National University</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

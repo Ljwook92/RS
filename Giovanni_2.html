@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="J.I. Seo">
+<meta name="author" content="J.W. Lee">
+
+<title>3&nbsp; Giovanni: Climate Data 2 – Remote Sensing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Satellite_1.html" rel="next">
+<link href="./Giovanni_1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Giovanni_2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Remote Sensing</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Remote Sensing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Satellite Image Classification (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lab" id="toc-lab" class="nav-link active" data-scroll-target="#lab"><span class="header-section-number">3.1</span> Lab</a>
+  <ul class="collapse">
+  <li><a href="#case-analyzing-correlation-between-water-surface-temperatures-and-water-blooms-in-the-black-sea-and-the-sea-of-azov" id="toc-case-analyzing-correlation-between-water-surface-temperatures-and-water-blooms-in-the-black-sea-and-the-sea-of-azov" class="nav-link" data-scroll-target="#case-analyzing-correlation-between-water-surface-temperatures-and-water-blooms-in-the-black-sea-and-the-sea-of-azov"><span class="header-section-number">3.1.1</span> Case: Analyzing Correlation Between Water Surface Temperatures and Water Blooms in the Black Sea and the Sea of Azov</a></li>
+  </ul></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">3.2</span> Practice</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.I. Seo </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Gyeongguk National University
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.W. Lee </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lab" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="lab"><span class="header-section-number">3.1</span> Lab</h2>
+<section id="case-analyzing-correlation-between-water-surface-temperatures-and-water-blooms-in-the-black-sea-and-the-sea-of-azov" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="case-analyzing-correlation-between-water-surface-temperatures-and-water-blooms-in-the-black-sea-and-the-sea-of-azov"><span class="header-section-number">3.1.1</span> Case: Analyzing Correlation Between Water Surface Temperatures and Water Blooms in the Black Sea and the Sea of Azov</h3>
+<blockquote class="blockquote">
+<p><strong>Background</strong></p>
+<p>저수지의 부영양화(물꽃 현상, Blooming of reservoirs)는 식물성 플랑크톤(Phyto-plankton)의 대량 번식으로 인해 <strong>물의 색깔이 변하고 수중의 산소 공급이 저해되는 현상이다.</strong> 이러한 현상의 원인 중 하나는 무기물, 특히 인 비료, 합성 세제, 유기 오염물질의 유입 때문이다. 해양 환경에서는 단세포 미세 플랑크톤인 식물성 플랑크톤(또는 미세 조류)이 먹이사슬의 기초를 이루며, 거의 모든 다른 해양 생물들은 여기에 의존한다. 알려진 식물성 플랑크톤 종의 약 2%는 해롭거나 독성을 가진다. 유해 조류 번식(Harmful algal blooms)은 특히 해양 포유류, 바다거북, 해안 조류, 어류 등 다양한 해양 생물에 면역학적, 신경학적 또는 생식 장애를 일으켜 부정적인 영향을 미칠 수 있다.</p>
+<p>그 대표적인 예로는 2004년 봄 플로리다 해안에서 107마리의 병코돌고래(Bottlenose dolphins)가 브레베톡신(Brevetoxins)이 높은 어류를 섭취하여 폐사한 사례가 있다<span class="citation" data-cites="twiner2012">(<a href="#ref-twiner2012" role="doc-biblioref">Twiner et al. 2012</a>)</span>. 식물성 플랑크톤의 성장과 번식을 유발하는 요인 중 하나는 수온 변화입니다. 온도 상승은 지구 기후 변화의 한 형태이기도 합니다. 위성으로부터 얻는 엽록소 농도(chlorophyll concentrations) 데이터는 식물성 플랑크톤의 발달과 물꽃 현상을 분석하는 데 사용된다. <strong>엽록소 농도는 수중 내 광합성 미생물의 양을 나타내는 지표이다.</strong></p>
+</blockquote>
+<p><strong>Task</strong></p>
+<p>NASA의 Giovanni 사이트에서 데이터 시각화를 사용하여 흑해(Black Sea)와 아조프해(Sea of Azov)에서 수온(water temperature)과 엽록소 농도(chlorophyll concentrations) 사이에 상관관계가 있는지 확인해 보자.</p>
+<hr>
+<p><u><strong>Tasks to be performed in this lab:</strong></u></p>
+<ol type="1">
+<li><p>2015년부터 2019년까지 여름 기간 동안 흑해(Black Sea)와 아조프해(Sea of Azov)의 평균 엽록소 농도 지도를 작성하고, 엽록소 농도가 높은 해역을 확인.</p></li>
+<li><p>2015년부터 2019년까지 흑해와 아조프해의 평균 수면 온도 지도 생성.</p></li>
+<li><p>2019년의 엽록소 농도와 수면 온도 간의 상관관계 지도를 확인하고, 두 해역(흑해와 아조프해) 중 어느 해역에서 이러한 요소들 간의 상관관계가 더 높은지 확인.</p></li>
+</ol>
+<hr>
+<p>Official Website: <a href="https://giovanni.gsfc.nasa.gov/giovanni/" class="uri">https://giovanni.gsfc.nasa.gov/giovanni/</a></p>
+<section id="엽록소-지도-생성" class="level4" data-number="3.1.1.1">
+<h4 data-number="3.1.1.1" class="anchored" data-anchor-id="엽록소-지도-생성"><span class="header-section-number">3.1.1.1</span> 엽록소 지도 생성</h4>
+<ol type="1">
+<li>먼저, <strong>흑해(Black Sea)</strong>와 <strong>아조프해(Sea of Azov)</strong>의 평균 엽록소 분포 지도 생성. 이를 위해 장기 평균 계절별 엽록소 농도를 표시하는 도구를 사용. 즉, 2015년부터 2019년까지 여름철(6월 ~ 8월) 동안의 평균 엽록소 농도 지도를 작성.</li>
+<li>흑해와 아조프해에서 물꽃 현상의 정점은 일반적으로 여름철에 관찰되기 때문에 여름철을 선택. 또한, 5년 동안의 평균값을 사용하면 한 해에만 나타난 극단적인 기상 조건의 영향을 중화할 수 있음. 따라서 좌측 상단 <strong><code>Select Plot</code></strong> 에서 <strong><code>Map, Recurring Averages</code></strong>를 선택.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-21 at 17.30.00.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p><strong><code>Select Seasonal Dates</code></strong> 에서 JJA(June, July, August - 즉, 여름철)를 지정하고, 기간은 2015~2019년까지로 설정.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-21 at 17.31.08.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="5" type="1">
+<li><strong><code>Select Region</code></strong> 에서 첫 번째 도구(<img src="images/Screenshot 2025-03-21 at 17.18.44.png" class="img-fluid" width="20">)를 클릭하여 지도를 선택창을 실행한 다음, 흑해(Black Sea)와 아조프해(Sea of Azov)를 선택.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-21 at 17.20.56.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="6" type="1">
+<li>분석할 데이터를 지정: 좌측 메뉴 <strong><code>Select variable</code></strong>에서 <strong><code>Measurements</code></strong> 탭을 확장한 후, <strong><code>Chlorophyll</code></strong> 체크. 우측에 표시되는 Variable 중에서, <code>ChlorophyII a concentration (water only)</code> 선택 후 Plot Data.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-21 at 17.32.46.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>2015년부터 2019년까지 여름철 동안의 평균 엽록소 농도 지도는 아래와 같다. 이 지도는 아조프해(Sea of Azov)와 흑해(Black Sea) 동부 해안선을 따라 높은 엽록소 농도 분포를 보여준다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-21 at 17.35.50.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+</section>
+<section id="수면온도-지도-생성" class="level4" data-number="3.1.1.2">
+<h4 data-number="3.1.1.2" class="anchored" data-anchor-id="수면온도-지도-생성"><span class="header-section-number">3.1.1.2</span> 수면온도 지도 생성</h4>
+<ol type="1">
+<li>동일한 기간과 계절에 대한 해수면 온도 지도 다시 생성. 데이터 선택 화면으로 돌아가려면 화면 오른쪽 하단에 있는 <strong><code>Back to Data Selection</code></strong> 버튼을 클릭.</li>
+<li>앞서 설정한 옵션은 변경하지 않고, 새로운 변수 지정. 해수면 온도(sea surface temperature). Keyword로 “sea surface temperature”를 입력. Variable에서 <code>Sea Surface Temperature at 11 microns (Day)</code>, 4km를 선택한 후 Plot Data.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-21 at 17.59.35.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>결과는 흑해(Black Sea)와 아조프해(Sea of Azov)의 해수면 온도 지도(sea surface temperatures map)를 볼 수 있다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.00.04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>지도에서 볼 수 있듯이, 거의 모든 지역의 해수면 온도는 24℃ 이상입니다. 이전에 수정했던 것처럼 <strong><code>Options</code></strong>도구를 사용하면, <strong>20℃ 이상</strong>의 값만 표시되도록 색상 스케일을 조정할 수 있다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.02.36.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>최소값과 최대값을 각각 20과 45로하면 아래와 같은 결과를 얻는다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.01.50.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p><u><strong>Check yourself</strong></u></p>
+<p>왜 아조프해(Sea of Azov)의 수온이 흑해(Black Sea) 서해안의 수온보다 더 높을까?</p>
+<ul>
+<li>아조프해는 흑해와 비교해서 깊이가 상당히 얕다. 그렇기 때문에, 흑해보다 더 빨리 수온이 상승할 수 있다.</li>
+</ul>
+<ol start="4" type="1">
+<li><p>이제 온도와 클로로필 농도 사이에 관계가 있는지 확인해 보자.<br>
+데이터 선택 화면으로 돌아가려면, 화면 오른쪽 하단에 있는 <strong><code>Back to Data Selection</code></strong>를 클릭. 그런 다음 <strong><code>Select Plot</code></strong>항목에서 <strong>Map, Correlation</strong>을 선택.</p>
+<p>이 시각화 모드는 계절 평균 없이 특정 기간 동안 두 가지 현상만 분석할 수 있다.<br>
+따라서 <strong><code>Select Date Range</code></strong>필드의 기간을 <strong>2019년 1월 1일부터 2019년 12월 31일</strong>로 지정.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.11.11.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="5" type="1">
+<li>왼쪽 사이드바에서 <strong>Measurements(측정값)</strong> 탭을 다시 확장한 후, 두 가지 변수인 <strong>Chlorophyll과 Sea Surface Temperature</strong>를 선택하고, <strong>Plot Data</strong> 버튼을 클릭.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.13.22.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>선택한 변수들 간의 상관관계가 높은 지역과 낮은 지역을 보여주는 지도를 얻을 수 있다. 이 지도는 일반적으로 엽록소(Chlorophyll) 농도가 높은 지역(아조프해와 흑해의 서해안)에서 온도와 엽록소 사이에 강한 상관관계가 있음을 보여준다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.16.20.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="6" type="1">
+<li>이러한 변수들 간의 관계를 좀더 직접적으로 보기 위해, 그래프로 확인 해보자.<br>
+<strong>데이터 선택(Data Selection)</strong> 화면으로 돌아간 후, <strong><code>Select Plot</code></strong>필드에서 <strong>Scatter, Area Averaged (Static)</strong>을 선택하고, <strong>Plot Data</strong> 클릭.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.20.41.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>결과는 상관계수가약 34%로 매우 약한 상관관계가 있는 것을 알 수 있다. 그치만 이 결과는, 아조프해와 흑해 모두를 포함한 상관관계를 보여주므로, 아조프해만 선택하여 엽록소와 수온의 관계를 확인해보자.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.23.02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-24 at 17.24.15.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>결과는 우리가 지도로 확인 했던 결과와 비슷하게, 아조프해의 엽록소가 수온과의 약 81%의 강한 상관관계를 갖는 것을 알 수 있다.</p>
+<p><u><strong>Check yourself</strong></u></p>
+<p>왜 아조프해에서 온도와 엽록소간의 상관계수(correlation coefficient)가 흑해보다 더 높게 나타났을까?</p>
+</section>
+</section>
+</section>
+<section id="practice" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="practice"><span class="header-section-number">3.2</span> Practice</h2>
+<p>이 실습을 다시 수행해 보고, 적조(Red Tides, 유해 조류 번성 - HAB)와 관련이 있을 가능성이 있는 <strong>온도와 엽록소 농도 간의 상관계수</strong>를 조사 해보기.</p>
+<blockquote class="blockquote">
+<p>적조(Red tides), 또는 유해 조류 번성(Harmful Algal Blooms, HABs)은 미세 조류(microscopic algae)가 비정상적으로 높은 농도로 증식하면서 발생하며, 종종 물의 색을 변하게 만든다. 멕시코만(Gulf of Mexico)에는 50종이 넘는 HAB 종이 존재하지만, 가장 잘 알려진 종 중 하나는 적조 생물인 Karenia brevis (K. brevis)이다.</p>
+<p><strong>K. brevis</strong>는 브레베톡신이라는 독소를 생성하며, 이 독소는 물고기, 새, 그리고 다른 해양 동물을 죽일 수 있습니다. 또한, 파도의 움직임으로 세포가 터지면서 독소가 공기 중으로 퍼질 경우, 사람에게는 호흡기 자극 등 건강 문제를 일으킬 수 있다. 브레베톡신에 오염된 조개류를 섭취하면 신경독성 패류 중독을 일으킬 수 있다.</p>
+<p><strong>K. brevis</strong> 적조는 멕시코만에서 거의 매년 발생하며, 일반적으로 늦여름이나 초가을에 나타납니다. 특히 <strong>플로리다 중부 및 남서부 해안</strong>, 즉 클리어워터(Clearwater)에서 <strong>새니벨 섬(Sanibel Island)</strong> 사이에서 가장 흔히 발생하지만, 멕시코만 어디서나 발생할 수 있다.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-377890531.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> 배경지식을 위한 참고문: 플로리다 남서부 지역의 위성 기반 조류 번성<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+<ol type="1">
+<li>해당 플로리다 지역의 적조는 2017년에 시작되어 2018년 가을에 절정에 달한다. 이 정보를 바탕으로, 2018년 가을(9월~10월)을 대상으로 적조 발생 기간 동안 <strong>해수면 온도(SST)</strong>와 <strong>엽록소 농도(Chlorophyll concentration)</strong> 간의 상관관계가 있는지 조사해보자.</li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-twiner2012" class="csl-entry" role="listitem">
+Twiner, Michael J., Leanne J. Flewelling, Spencer E. Fire, Sabrina R. Bowen-Stevens, Joseph K. Gaydos, Christine K. Johnson, Jan H. Landsberg, et al. 2012. <span>“Comparative Analysis of Three Brevetoxin-Associated Bottlenose Dolphin (Tursiops Truncatus) Mortality Events in the Florida Panhandle Region (USA).”</span> Edited by Andreas Fahlman. <em>PLoS ONE</em> 7 (8): e42974. <a href="https://doi.org/10.1371/journal.pone.0042974">https://doi.org/10.1371/journal.pone.0042974</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><a href="https://coastalscience.noaa.gov/science-areas/habs/hab-monitoring-system/algal-blooms-from-satellite-southwest-florida/" class="uri">https://coastalscience.noaa.gov/science-areas/habs/hab-monitoring-system/algal-blooms-from-satellite-southwest-florida/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Giovanni_1.html" class="pagination-link" aria-label="Giovanni: Climate Data 1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Satellite_1.html" class="pagination-link" aria-label="Satellite Image Classification (QGIS)">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Satellite Image Classification (QGIS)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Data Science-Geospatial Lab, Jung-In Seo, Jeong-Wook Lee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Gyeongguk National University</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

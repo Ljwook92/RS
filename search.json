@@ -1,0 +1,192 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Remote Sensing",
+    "section": "",
+    "text": "0.1 Introduction\nRemote Sensing챕터에서는 QGIS나 다양한 무료 위성 데이터를 활용하여, 지리적으로 분석하는 것을 소개한다.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Remote Sensing</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_2.html",
+    "href": "Giovanni_2.html",
+    "title": "3  Giovanni: Climate Data 2",
+    "section": "",
+    "text": "3.1 Lab",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Giovanni: Climate Data 2</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_2.html#lab",
+    "href": "Giovanni_2.html#lab",
+    "title": "3  Giovanni: Climate Data 2",
+    "section": "",
+    "text": "3.1.1 Case: Analyzing Correlation Between Water Surface Temperatures and Water Blooms in the Black Sea and the Sea of Azov\n\nBackground\n저수지의 부영양화(물꽃 현상, Blooming of reservoirs)는 식물성 플랑크톤(Phyto-plankton)의 대량 번식으로 인해 물의 색깔이 변하고 수중의 산소 공급이 저해되는 현상이다. 이러한 현상의 원인 중 하나는 무기물, 특히 인 비료, 합성 세제, 유기 오염물질의 유입 때문이다. 해양 환경에서는 단세포 미세 플랑크톤인 식물성 플랑크톤(또는 미세 조류)이 먹이사슬의 기초를 이루며, 거의 모든 다른 해양 생물들은 여기에 의존한다. 알려진 식물성 플랑크톤 종의 약 2%는 해롭거나 독성을 가진다. 유해 조류 번식(Harmful algal blooms)은 특히 해양 포유류, 바다거북, 해안 조류, 어류 등 다양한 해양 생물에 면역학적, 신경학적 또는 생식 장애를 일으켜 부정적인 영향을 미칠 수 있다.\n그 대표적인 예로는 2004년 봄 플로리다 해안에서 107마리의 병코돌고래(Bottlenose dolphins)가 브레베톡신(Brevetoxins)이 높은 어류를 섭취하여 폐사한 사례가 있다(Twiner et al. 2012). 식물성 플랑크톤의 성장과 번식을 유발하는 요인 중 하나는 수온 변화입니다. 온도 상승은 지구 기후 변화의 한 형태이기도 합니다. 위성으로부터 얻는 엽록소 농도(chlorophyll concentrations) 데이터는 식물성 플랑크톤의 발달과 물꽃 현상을 분석하는 데 사용된다. 엽록소 농도는 수중 내 광합성 미생물의 양을 나타내는 지표이다.\n\nTask\nNASA의 Giovanni 사이트에서 데이터 시각화를 사용하여 흑해(Black Sea)와 아조프해(Sea of Azov)에서 수온(water temperature)과 엽록소 농도(chlorophyll concentrations) 사이에 상관관계가 있는지 확인해 보자.\n\nTasks to be performed in this lab:\n\n2015년부터 2019년까지 여름 기간 동안 흑해(Black Sea)와 아조프해(Sea of Azov)의 평균 엽록소 농도 지도를 작성하고, 엽록소 농도가 높은 해역을 확인.\n2015년부터 2019년까지 흑해와 아조프해의 평균 수면 온도 지도 생성.\n2019년의 엽록소 농도와 수면 온도 간의 상관관계 지도를 확인하고, 두 해역(흑해와 아조프해) 중 어느 해역에서 이러한 요소들 간의 상관관계가 더 높은지 확인.\n\n\nOfficial Website: https://giovanni.gsfc.nasa.gov/giovanni/\n\n3.1.1.1 엽록소 지도 생성\n\n먼저, 흑해(Black Sea)와 아조프해(Sea of Azov)의 평균 엽록소 분포 지도 생성. 이를 위해 장기 평균 계절별 엽록소 농도를 표시하는 도구를 사용. 즉, 2015년부터 2019년까지 여름철(6월 ~ 8월) 동안의 평균 엽록소 농도 지도를 작성.\n흑해와 아조프해에서 물꽃 현상의 정점은 일반적으로 여름철에 관찰되기 때문에 여름철을 선택. 또한, 5년 동안의 평균값을 사용하면 한 해에만 나타난 극단적인 기상 조건의 영향을 중화할 수 있음. 따라서 좌측 상단 Select Plot 에서 Map, Recurring Averages를 선택.\n\n\n\n\n\n\nSelect Seasonal Dates 에서 JJA(June, July, August - 즉, 여름철)를 지정하고, 기간은 2015~2019년까지로 설정.\n\n\n\n\n\n\nSelect Region 에서 첫 번째 도구()를 클릭하여 지도를 선택창을 실행한 다음, 흑해(Black Sea)와 아조프해(Sea of Azov)를 선택.\n\n\n\n\n\n\n\n분석할 데이터를 지정: 좌측 메뉴 Select variable에서 Measurements 탭을 확장한 후, Chlorophyll 체크. 우측에 표시되는 Variable 중에서, ChlorophyII a concentration (water only) 선택 후 Plot Data.\n\n\n\n\n\n\n2015년부터 2019년까지 여름철 동안의 평균 엽록소 농도 지도는 아래와 같다. 이 지도는 아조프해(Sea of Azov)와 흑해(Black Sea) 동부 해안선을 따라 높은 엽록소 농도 분포를 보여준다.\n\n\n\n\n\n\n\n3.1.1.2 수면온도 지도 생성\n\n동일한 기간과 계절에 대한 해수면 온도 지도 다시 생성. 데이터 선택 화면으로 돌아가려면 화면 오른쪽 하단에 있는 Back to Data Selection 버튼을 클릭.\n앞서 설정한 옵션은 변경하지 않고, 새로운 변수 지정. 해수면 온도(sea surface temperature). Keyword로 “sea surface temperature”를 입력. Variable에서 Sea Surface Temperature at 11 microns (Day), 4km를 선택한 후 Plot Data.\n\n\n\n\n\n\n결과는 흑해(Black Sea)와 아조프해(Sea of Azov)의 해수면 온도 지도(sea surface temperatures map)를 볼 수 있다.\n\n\n\n\n\n\n지도에서 볼 수 있듯이, 거의 모든 지역의 해수면 온도는 24℃ 이상입니다. 이전에 수정했던 것처럼 Options도구를 사용하면, 20℃ 이상의 값만 표시되도록 색상 스케일을 조정할 수 있다.\n\n\n\n\n\n\n최소값과 최대값을 각각 20과 45로하면 아래와 같은 결과를 얻는다.\n\n\n\n\n\nCheck yourself\n왜 아조프해(Sea of Azov)의 수온이 흑해(Black Sea) 서해안의 수온보다 더 높을까?\n\n아조프해는 흑해와 비교해서 깊이가 상당히 얕다. 그렇기 때문에, 흑해보다 더 빨리 수온이 상승할 수 있다.\n\n\n이제 온도와 클로로필 농도 사이에 관계가 있는지 확인해 보자.\n데이터 선택 화면으로 돌아가려면, 화면 오른쪽 하단에 있는 Back to Data Selection를 클릭. 그런 다음 Select Plot항목에서 Map, Correlation을 선택.\n이 시각화 모드는 계절 평균 없이 특정 기간 동안 두 가지 현상만 분석할 수 있다.\n따라서 Select Date Range필드의 기간을 2019년 1월 1일부터 2019년 12월 31일로 지정.\n\n\n\n\n\n\n\n왼쪽 사이드바에서 Measurements(측정값) 탭을 다시 확장한 후, 두 가지 변수인 Chlorophyll과 Sea Surface Temperature를 선택하고, Plot Data 버튼을 클릭.\n\n\n\n\n\n\n선택한 변수들 간의 상관관계가 높은 지역과 낮은 지역을 보여주는 지도를 얻을 수 있다. 이 지도는 일반적으로 엽록소(Chlorophyll) 농도가 높은 지역(아조프해와 흑해의 서해안)에서 온도와 엽록소 사이에 강한 상관관계가 있음을 보여준다.\n\n\n\n\n\n\n이러한 변수들 간의 관계를 좀더 직접적으로 보기 위해, 그래프로 확인 해보자.\n데이터 선택(Data Selection) 화면으로 돌아간 후, Select Plot필드에서 Scatter, Area Averaged (Static)을 선택하고, Plot Data 클릭.\n\n\n\n\n\n\n결과는 상관계수가약 34%로 매우 약한 상관관계가 있는 것을 알 수 있다. 그치만 이 결과는, 아조프해와 흑해 모두를 포함한 상관관계를 보여주므로, 아조프해만 선택하여 엽록소와 수온의 관계를 확인해보자.\n\n\n\n\n\n\n\n\n\n\n결과는 우리가 지도로 확인 했던 결과와 비슷하게, 아조프해의 엽록소가 수온과의 약 81%의 강한 상관관계를 갖는 것을 알 수 있다.\nCheck yourself\n왜 아조프해에서 온도와 엽록소간의 상관계수(correlation coefficient)가 흑해보다 더 높게 나타났을까?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Giovanni: Climate Data 2</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_2.html#practice",
+    "href": "Giovanni_2.html#practice",
+    "title": "3  Giovanni: Climate Data 2",
+    "section": "3.2 Practice",
+    "text": "3.2 Practice\n이 실습을 다시 수행해 보고, 적조(Red Tides, 유해 조류 번성 - HAB)와 관련이 있을 가능성이 있는 온도와 엽록소 농도 간의 상관계수를 조사 해보기.\n\n적조(Red tides), 또는 유해 조류 번성(Harmful Algal Blooms, HABs)은 미세 조류(microscopic algae)가 비정상적으로 높은 농도로 증식하면서 발생하며, 종종 물의 색을 변하게 만든다. 멕시코만(Gulf of Mexico)에는 50종이 넘는 HAB 종이 존재하지만, 가장 잘 알려진 종 중 하나는 적조 생물인 Karenia brevis (K. brevis)이다.\nK. brevis는 브레베톡신이라는 독소를 생성하며, 이 독소는 물고기, 새, 그리고 다른 해양 동물을 죽일 수 있습니다. 또한, 파도의 움직임으로 세포가 터지면서 독소가 공기 중으로 퍼질 경우, 사람에게는 호흡기 자극 등 건강 문제를 일으킬 수 있다. 브레베톡신에 오염된 조개류를 섭취하면 신경독성 패류 중독을 일으킬 수 있다.\nK. brevis 적조는 멕시코만에서 거의 매년 발생하며, 일반적으로 늦여름이나 초가을에 나타납니다. 특히 플로리다 중부 및 남서부 해안, 즉 클리어워터(Clearwater)에서 새니벨 섬(Sanibel Island) 사이에서 가장 흔히 발생하지만, 멕시코만 어디서나 발생할 수 있다.\n\n\n\n\n\n\n\nNOTE: 배경지식을 위한 참고문: 플로리다 남서부 지역의 위성 기반 조류 번성1\n\n\n해당 플로리다 지역의 적조는 2017년에 시작되어 2018년 가을에 절정에 달한다. 이 정보를 바탕으로, 2018년 가을(9월~10월)을 대상으로 적조 발생 기간 동안 해수면 온도(SST)와 엽록소 농도(Chlorophyll concentration) 간의 상관관계가 있는지 조사해보자.\n\n\n\n\n\nTwiner, Michael J., Leanne J. Flewelling, Spencer E. Fire, Sabrina R. Bowen-Stevens, Joseph K. Gaydos, Christine K. Johnson, Jan H. Landsberg, et al. 2012. “Comparative Analysis of Three Brevetoxin-Associated Bottlenose Dolphin (Tursiops Truncatus) Mortality Events in the Florida Panhandle Region (USA).” Edited by Andreas Fahlman. PLoS ONE 7 (8): e42974. https://doi.org/10.1371/journal.pone.0042974.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Giovanni: Climate Data 2</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_2.html#footnotes",
+    "href": "Giovanni_2.html#footnotes",
+    "title": "3  Giovanni: Climate Data 2",
+    "section": "",
+    "text": "https://coastalscience.noaa.gov/science-areas/habs/hab-monitoring-system/algal-blooms-from-satellite-southwest-florida/↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Giovanni: Climate Data 2</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_1.html",
+    "href": "Giovanni_1.html",
+    "title": "2  Giovanni: Climate Data 1",
+    "section": "",
+    "text": "2.1 Introduction\nGiovanni는 NASA1 위성에서 수집한 지리 참조(geo-referenced) 데이터를 인터넷을 통해 직접 표시해주는 플랫폼.\n손쉽게 NASA 위성의 다양한 기기에서 수집된 데이터를 면적 지도(area plots), 시계열(time series), 남북 평균(meridional averages), 동서 평균(zonal averages), 수직 프로파일(vertical profiles) 등 별도의 대용량 데이터 다운로드나 복잡한 프로그램 없이도 위성 관측 데이터를 다양한 형식으로 시각화하고 분석할 수 있음.\n예를들어, GIovanni는 사하라 먼지 폭풍(Saharan dust storm) 주변 환경에서 발생하는 현상부터 허리케인 카트리나(Hurricane Katrina)가 해양 표면의 엽록소 농도에 미친 영향까지 사용자가 폭넓게 분석할 수 있음. 또한 단일 매개변수(single parameter) 및 여러 매개변수(multiple parameters)를 선택하여 특정 시간대와 지역 범위에 걸쳐 그래프를 생성할 수 있음.\n데이터는 여러 인터페이스를 통해 접근 및 표시되며, 각 인터페이스에서는 하나 이상의 위성 기기에서 측정된 매개변수 시각화 가능. 사용 가능한 매개변수에는 강수량, 온도, 습도, 가스 농도 등등.\nKey features:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Giovanni: Climate Data 1</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_1.html#introduction",
+    "href": "Giovanni_1.html#introduction",
+    "title": "2  Giovanni: Climate Data 1",
+    "section": "",
+    "text": "대기 구성, 공기질, 강수량, 해양 색상, 지표 온도, 토양 수분 등 다양한 지구환경 데이터를 제공\n지도 시각화, 시계열 플롯, 산점도, 계절 평균 계산 등의 기능 시간 범위, 지리적 영역(박스 그리기), 변수 필터링 기능\n분석 결과를 이미지 또는 CSV 등으로 다운로드 가능",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Giovanni: Climate Data 1</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_1.html#lab",
+    "href": "Giovanni_1.html#lab",
+    "title": "2  Giovanni: Climate Data 1",
+    "section": "2.2 Lab",
+    "text": "2.2 Lab\n\n2.2.1 Case: Studying Changes in NO 2and CO 2Concentrations in the Atmosphere of Ukraine\n이산화질소(NO₂)와 이산화탄소(CO₂)는 대기 중에 존재하는 무기 화합물로, 인체 건강에 해로운 영향을 미칠 수 있다. 이러한 물질의 배출원으로는 내연기관(내연 엔진), 화력 발전소, 공장 등이 있다.\n\n2020년 3월 말, ESA(the European Space Agency)은 2019년 평균 월별 농도와 비교했을 때 파리, 로마, 마드리드 등 유럽 주요 도시에서 이산화질소 배출이 크게 감소했다는 데이터를 발표했다. 2\n중국에서는 COVID-19 대유행이 절정에 달했을 때, 대기 중 유해 배출물이 이전 3년 같은 기간과 비교하여 20~30% 감소한 것으로 나타났다.3\n또한, 영국이 봉쇄 조치를 시행한 지 2주 후, 일부 도시에서 이산화질소 오염이 2019년 같은 기간 대비 60% 감소했다.4\n\n그렇다면 팬데믹은 우크라이나 대기 중 이산화질소 농도에 어떤 영향을 미쳤을까?\n\nTasks to be performed in this lab:\n\nGiovanni 서비스에 가입 및 로그인.\n2014년 6월 15일부터 2015년 6월 15일까지와 2019년 6월 15일부터 2020년 6월 15일까지의 우크라이나 대기 중 이산화질소(Nitrogen Dioxide) 평균 농도를 찾아 시각적으로 비교.\nGiovanni에서 제공하는 전체 기간 동안 우크라이나의 이산화탄소(Carbon Dioxide) 농도 변화를 그래프로 생성.\n\n\n1. 회원가입 및 로그인. Official website: https://giovanni.gsfc.nasa.gov/giovanni/\n2. 날짜 선택 (년/월/일): Select Date Range (UTC) 필드에서 프로그램이 평균 지도를 생성할 기간을 선택.\n(예: 2014년 6월 15일 – 2015년 6월 15일)\n3. 표시 형식 선택: Select Plot 필드에서 표시 방법을 선택.\n(예: Time-Averaged Map(시간 평균 지도))\n\n4. 연구할 위치 선택: Select Region (Bounding Box or Shape) 필드에서 연구할 지역을 선택.\n\nSelect Region은 다양한 형태의 연구 지역을 처리 가능.\n\n국가의 행정 경계 내에서 설정,\n사용자가 지정한 사각형 또는 직사각형 형태로 설정.\n\nYou can learn more about other ways of displaying information from the user guide.\n\n특정 지역의 데이터를 표시해야 할 경우, 선택한 영역은 반드시 해당 지역을 포함하는 넓은 범위로 설정되어야 함. 지도는 마우스 휠 또는 “– +” 버튼을 사용해 확대/축소할 수 있으며, 아이콘 ()을 사용하여 지도를 이동할 수도 있음.\n도구 () 를 사용해 우크라이나 북부 지역 중 수도 키이우(Kyiv)를 포함하는 영토를 선택하기.\n\n선택 후,  눌러서 나오기.\n5. 조사할 변수를 선택 – 이산화질소(Nitrogen Dioxide; NO₂):\n\n좌측 Select Variables 패널에서 Atmospheric Chemistry(대기 화학) 를 선택.\n화면에 새로 나타나는 목록에서 NO₂ Tropospheric Column (30% Cloud Screened)를 선택하여 대류권 층 내의 이산화질소 농도를 표시.\n마지막으로 Plot Data 버튼을 클릭하여 데이터를 시각화.\n\n\n\nNOTE: 이 데이터 세트에서 이산화질소(NO₂) 농도는 분자 수/cm²(molecules/cm²)로 표시됨. 위성 센서는 위성 기기에서 지표면까지의 수직 기둥 내에 존재하는 분자 수를 지구 표면의 단위 면적당 추정함. 따라서 값이 molecules/cm² 단위로 제공됨.\n\n\n5. 결과적으로, 선택한 지역의 평균(연간) 이산화질소 농도를 나타내는 지도를 얻음.\n그러나, 결과에서 알 수 있다시피, 지도에 표시된 값의 차이는 표준 이미지 분류(standard classification) 에서는 잘 드러나지 않음. 이유는 기호의 단계(gradation of symbols)가 자동으로 최대값을 2.00000005e+16 으로 설정하지만, 실제로 우리 지역의 데이터는 주로 0.50000005e+16 범위에 해당하기 때문.\n즉, 최대 데이터 범위가 2.00000005e+16에서 0.50000005e+16 사이로 설정되어 있음.\n이를 변경하기 위해, 다음과 같은 단계를 적용.\n\n우측 상단 Options 메뉴에서 을 선택.\n최대 데이터 범위(Maximum data range)를 0.50000005e+16으로 설정.\nSmoothing(부드럽게 처리) 기능을 켜고,\nRe-Plot(다시 그리기) 를 클릭.\n\n\n\n\n\n\n\n\n\n\n\n\n이 결과를 가지고, 선택한 지역의 평균(연간) 이산화질소(NO₂) 농도 지도를 확인할 수 있음.\n이 지도는 Giovanni에 자동으로 저장되므로 따로 저장할 필요가 없음.\n다음 작업으로 진행하려면, 화면 오른쪽 하단에 있는 Back to Data Selection(데이터 선택으로 돌아가기) 버튼을 클릭.\n6. 동일한 방법(알고리즘)을 사용하여, 2019년 6월 15일부터 2020년 6월 15일까지 같은 지역의 대류권 내 평균 이산화질소 농도를 확인하기. (결과는 아래와 같아야함)\n\n\n결과 생각해보기.\n\n\n2019-2020년의 이산화질소 농도는 2014-2015년 기간과 비교하여 왜, 그리고 어떻게 변화했을까?\n대기 중 이산화질소(NO₂) 농도의 이러한 변화는 환경에 어떤 영향을 미쳤을까?\n\n이제 지구 온난화에 기여하는 가스인 이산화탄소(Carbon dioxide; CO₂)의 농도를 같은 지역에서 2002년부터 2017년까지 분석해 보자.\n\n이산화탄소는 지구 기후 변화를 유발하는 주요 화합물 중 하나.\n\nGiovanni에서 제공되는 전체 기간 동안, 선택한 지역의 이산화탄소 농도가 어떻게 변화했는지 확인.\n\n좌측 상단 Select Plot 필드에서 Time Series Area-Averaged(지역 평균 시계열) 표시 모드를 지정.\n이 그래프는 선택한 기간 동안 평균값의 변화를 보여주는 표준 시계열 그래프로, 선택한 지역 내 이산화탄소 농도의 변화를 시각적으로 확인할 수 있음.\n\nAtmospheric Chemistry(대기 화학) 패널에서 2002–2012년과 2010–2017년 동안의 이산화탄소 농도도 확인할 수 있음.\n\n(2002/09/01 - 2012/02/29)\n\n(2010/01/01 - 2017/02/28)\n\n따라서 서로 다른 기간(2002–2012년과 2010–2017년)의 CO₂ 농도를 두 개의 다른 그래프로 표시할 수 있음.\n\nNOTE: 2002 ~ 2017년까지의 이산화탄소 농도 변화를 한 번에 보고 싶지만, Giovanni에는 두 가지 다른 데이터셋으로 나뉨.\n\n2002년부터 2012년까지의 데이터는 IR-Only(적외선 관측 기반) 데이터 없이 결합 관측(Combined Retrieval) 방식으로만 제공.\n반면, 2010년부터 2017년까지의 데이터는 IR-Only 버전이 따로 제공.\n\n이렇게 나뉘는 이유는,\n\n위성 관측 기술과 자료 처리 방식이 시간이 지나면서 발전.\n초기(2002–2012년)에는 IR과 다른 채널을 결합해 처리한 자료만 제공했지만,\n이후(2010년 이후)에는 적외선(IR) 채널만으로 분석한 고유한 자료(IR-Only)도 제공 시작.\n\n그래서 두 시기 데이터는 다른 형식으로 제공되며, 우리가 두 기간을 비교할 때는\n\n같은 지역에 대해 각각의 기간별로 별도로 그래프를 만들고\n데이터의 처리 방식이 달랐음을 인지하고 비교해 보는 것이 중요.\n\n\nResults:\n\n\n\n\n\n\n\n\n\n\n그래프는 Download 버튼을 클릭하여 개별적으로 다운로드해 그림 파일로 저장할 수 있고, 또는 서로 다른 기간의 데이터를 장치에 다운로드한 후, R Studio 에서 공통 그래프를 직접 만들 수 있음.\n이를 위해,\n\n화면 좌측의 History 탭에서 Downloads 항목 아래에 있는 CSV를 선택.\n두 기간의 데이터를 생성했기 때문에, 두 개의 CSV 파일을 각각 다운 받아야 함.\n\n\n\nfile_list &lt;- list.files(path = \"Data/\",\n                        pattern = \"52N\\\\.csv$\", # 파일명이 52N.csv로 끝나는 파일만\n                        full.names = TRUE)\n\nprint(file_list)\n\n[1] \"Data//g4.areaAvgTimeSeries.AIRS3C2M_005_mole_fraction_of_carbon_dioxide_in_free_troposphere.20100101-20170228.21E_44N_40E_52N.csv\"\n[2] \"Data//g4.areaAvgTimeSeries.AIRX3C2M_005_mole_fraction_of_carbon_dioxide_in_free_troposphere.20020901-20120229.21E_44N_40E_52N.csv\"\n\n\n\n# 파일 이름에서 변수명을 추출 후 각각 data_2002, data_2010 객체로 저장\n\nfor (file in file_list) {\n  # 파일 이름에서 연도 추출 (4자리 숫자)\n  year &lt;- regmatches(file, regexpr(\"20[0-9]{2}\", file))\n  \n  # 변수명 생성\n  var_name &lt;- paste0(\"data_\", year)\n  \n  # CSV 파일을 9행부터 읽어오기\n  df &lt;- read.csv(file, skip = 8) \n  \n  # 두 번째 열 이름을 'carbon'으로 변경\n  colnames(df)[2] &lt;- \"carbon\"\n  \n  # 해당 변수명으로 최종 할당\n  assign(var_name, df)\n}\n\n\nhead(data_2002)\n\n                 time   carbon\n1 2002-09-01 00:00:00 371.1190\n2 2002-10-01 00:00:00 371.2208\n3 2002-11-01 00:00:00 372.1701\n4 2002-12-01 00:00:00 370.5606\n5 2003-01-01 00:00:00 373.6284\n6 2003-02-01 00:00:00 374.3577\n\nhead(data_2010)\n\n                 time   carbon\n1 2010-01-01 00:00:00 388.1938\n2 2010-02-01 00:00:00 389.6681\n3 2010-03-01 00:00:00 392.0399\n4 2010-04-01 00:00:00 392.7701\n5 2010-05-01 00:00:00 392.1530\n6 2010-06-01 00:00:00 392.1415\n\n\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(plotly)\n\n# data_2002는 2009-12-01 이전까지만 사용\ndata_2002_trim &lt;- data_2002 %&gt;%\n  filter(as.Date(time) &lt; as.Date(\"2010-01-01\"))\n\n# data_2010은 2010-01-01부터 사용\ndata_2010_trim &lt;- data_2010 %&gt;%\n  filter(as.Date(time) &gt;= as.Date(\"2010-01-01\"))\n\n# 두 데이터프레임 합치기\ndata_combined &lt;- bind_rows(data_2002_trim, data_2010_trim)\n\n# time 컬럼을 Date 형식으로 변환\ndata_combined$time &lt;- as.Date(data_combined$time)\n\n# ggplot으로 기본 라인 그래프 만들기\np &lt;- ggplot(data_combined, aes(x = time, y = carbon)) +\n  geom_line(color = \"blue\") +\n  labs(title = \"Carbon Dioxide Concentration (Combined Data)\",\n       x = \"Date\",\n       y = \"CO2 (mole fraction)\") +\n  theme_minimal()\n\nggplotly(p)\n\n\n\n\n\n\n결과 생각해보기.\n\n\n2002년부터 2017년까지 CO₂ 농도는 얼마나 증가했나?\n이 그래프는 어떤 추세를 보여주고 있나?\n2032년까지 이 지역의 CO₂ 농도 변화 추세를 예측해 보자.\nGiovanni에서 조사할 수 있는 다른 화학 화합물에는 무엇이 있을까?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Giovanni: Climate Data 1</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_1.html#practice",
+    "href": "Giovanni_1.html#practice",
+    "title": "2  Giovanni: Climate Data 1",
+    "section": "2.3 Practice",
+    "text": "2.3 Practice\n\n글로벌 모니터링 연구소(Global Monitoring Laboratory)5에 따르면, 1980년 이후 전 세계 이산화탄소 농도는 지속적으로 증가하고 있다. 그렇다면, 위성 관측 데이터를 이용하여 미국에서 이 오염물질 농도를 모니터링하는 것이 가능할까?\n읽은 내용과 COVID-19 ’대응’에 근거하여, 실습을 다시 수행하고 미국 동부 해안 도시(보스턴, 뉴욕, 워싱턴 DC 등)의 대기 중 NO₂ 및 CO₂ 농도 변화를 조사해 보세요.\n\n\n직접 생성한 그래프 화면 캡처와 주석(설명)을 포함하여 분석 과정을 별도의 문서로 작성.\n여기에 본인의 해석을 반드시 포함할 것.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Giovanni: Climate Data 1</span>"
+    ]
+  },
+  {
+    "objectID": "Giovanni_1.html#footnotes",
+    "href": "Giovanni_1.html#footnotes",
+    "title": "2  Giovanni: Climate Data 1",
+    "section": "",
+    "text": "https://www.nasa.gov/learning-resources/for-educators/for-educators-grades-9-12/↩︎\nhttps://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-5P/Coronavirus_lockdown_leading_to_drop_in_pollution_across_Europe↩︎\nhttps://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-5P/COVID-19_nitrogen_dioxide_over_China↩︎\nhttps://www.bbc.com/news/uk-england-52202974↩︎\nhttps://gml.noaa.gov/ccgg/trends/global.html↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Giovanni: Climate Data 1</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_1.html",
+    "href": "Satellite_1.html",
+    "title": "4  Satellite Image Classification (QGIS)",
+    "section": "",
+    "text": "4.1 Introduction\n다중분광 위성 (Multispectral Satellites)\n다중분광 이미지는 인간이 눈으로 볼 수 있는 빨강(R), 초록(G), 파랑(B) 뿐만 아니라, 적외선을 이용하여 다양한 파장의 정보를 담은 이미지이다. 이렇게 이미지에 담겨있는 다양한 파장의 색상은 각각 Band라고 불린다. 그렇기 때문에, 다중분광 이미지는 보통 4~10개 이상의 밴드를 포함한다고 표현한다.\n이러한 다중분관 이미지는 위성들로부터 촬영되어 수집되며, 이를 위한 위성은 다양하다. 다중분광 이미지가 중요한 이유는, 다양한 파장의 정보를 모으면 인간의 눈으로 볼 수 없는 정보까지 활용할 수 있는 활용 방안은 아래와 같이 널리 사용된다.\n그중에서도 Landsat 위성은 1970년대 초부터 미국 항공우주국에서 개발한 다중분광 위성으로, 토지 피복(land cover) 모니터링에 특히 유용하다. 그 이유는 이미지를 무료로 제공하며 웹사이트에서 직접 다운로드할 수 있기 때문. 또한 지난 수십 년 동안 데이터를 지속적으로 수집해 왔고, 최근 이미지까지 포함된 데이터 아카이브가 계속해서 확장되고 있어, 환경 연구에서 널리 사용된다.\nLandsat 8 and Landsat 9 Operational Land Imager (OLI)  and Thermal Infrared Sensor (TIRS)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Satellite Image Classification (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_1.html#introduction",
+    "href": "Satellite_1.html#introduction",
+    "title": "4  Satellite Image Classification (QGIS)",
+    "section": "",
+    "text": "농작물의 건강 상태 분석\n토지 피복 분류\n수자원 모니터링\n산불 피해 탐지\n\n\n\n\n\n\n\n\n\n\n\nBands\nWavelength (micrometers)\nResolution (meters)\n\n\n\n\nBand 1 – Coastal aerosol\n0.43–0.45\n30\n\n\nBand 2 – Blue\n0.45–0.51\n30\n\n\nBand 3 – Green\n0.53–0.59\n30\n\n\nBand 4 – Red\n0.64–0.67\n30\n\n\nBand 5 – Near Infrared (NIR)\n0.85–0.88\n30\n\n\nBand 6 – Shortwave Infrared (SWIR) 1\n1.57–1.65\n30\n\n\nBand 7 – Shortwave Infrared (SWIR) 2\n2.11–2.29\n30\n\n\nBand 8 – Panchromatic\n0.50–0.68\n15\n\n\nBand 9 – Cirrus\n1.36–1.38\n30\n\n\nBand 10 – Thermal Infrared (TIRS) 1\n10.6–11.19\n100 (resampled to 30)\n\n\nBand 11 – Thermal Infrared (TIRS) 2\n11.50–12.51\n100 (resampled to 30)\n\n\n\n\nNote: Landsat 8 센서의 해상도는 위에 표1로 정리된다. 또한, Landsat 위성이 촬영하는 같은 장소의 지구 표면\u001d는 16일 주기로 업데이트 된다.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Satellite Image Classification (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_1.html#lab",
+    "href": "Satellite_1.html#lab",
+    "title": "4  Satellite Image Classification (QGIS)",
+    "section": "4.2 Lab",
+    "text": "4.2 Lab\n\n4.2.1 Downloading a Landsat-8 Scene from United States Geological Survey - Earth Explorer\n\nOfficial Website : https://earthexplorer.usgs.gov/ (회원가입 및 로그인)\n지도를 드래그하여 와이오밍 주의 북서쪽 모서리로 이동 (Yellowstone National Park).\n\n\n\n\n\n\n\n검색 기준 입력(Enter Search Criteria) 상자에서 Select a Geocoding Method을 Feature (GNIS)로 선택.\n그런 다음 US Features를 선택.\n\n\n\n\n\n\n\n마우스를 지도에서 클릭하여 Yellowstone National Park을 포함하는 아래와 같은 포인트 지정 (시계방향 순서로). 다음으로, 왼쪽 하단 Data Range는 2023/07/01 ~ 2023/09/01을 선택 후 Data Sets를 선택.\n\n\n\n\n\n\n\n2nd Step displays로 넘어와서, 아래와 같이, Landsat - Landsat Collection2 Level-1 - Landsat 8-9 OLI/TIRS C2 L1순서로 체크. 그리고 하단 Results 클릭.\n\n\n\n\n\n\n\nResults를 누르면 앞서 설정한 결과들이 표시된다. 그중에서 LC09_L1TP_038029_20230816_20230817_02_T1 데이터를 선택. (4번째 페이지) 이 데이터는 2023년 8월 16일에 기록되었음. 이 날은 옐로스톤 지역이 구름에 가려지지 않아 다운로드하기에 좋은 데이터.\n\n\n\n\n\n\n\n아래 빨간 테두리 지역을 클릭하여 미리보기 이미지를 확인할 수도 있음.\n\n\n\n\n\n\n\n\n\n\n\n\n아이콘()을 클릭하여 다운로드 옵션 메뉴를 실행. 아래 메뉴에서 우측 상단의 Select Files를 선택.\n\n\n\n\n\n\n\n모든 파일을 다운 받아도 되지만, 아래와 같이 분석에 필요한 밴드만 선택하고 Download All Selected Now 클릭하여 다운 받기.\n\n\n\n\n\n\n다운 받은 파일은 임의 폴더로 옮겨 한 곳에 모아두기.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Satellite Image Classification (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_1.html#footnotes",
+    "href": "Satellite_1.html#footnotes",
+    "title": "4  Satellite Image Classification (QGIS)",
+    "section": "",
+    "text": "https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Satellite Image Classification (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_2.html",
+    "href": "Satellite_2.html",
+    "title": "5  Satellite Image Classification 2 (QGIS)",
+    "section": "",
+    "text": "5.1 Introduction",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Satellite Image Classification 2 (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_2.html#introduction",
+    "href": "Satellite_2.html#introduction",
+    "title": "5  Satellite Image Classification 2 (QGIS)",
+    "section": "",
+    "text": "5.1.1 Download QGIS\nQGIS는 무료 오픈 소스 지리정보시스템(GIS) 소프트웨어로, 데이터를 시각화하고 관리·편집·분석하며 인쇄 가능한 지도를 제작할 수 있는 장점이 있다. Official Website: https://qgis.org\n\n여기서 각 OS에 맞게 Long Term Version을 다운로드.\n\n\n5.1.2 Clipping\nLandsat의 범위는 관심 영역(Area of Interest, AOI)보다 더 클 수 있다. AOI에 집중하기 위해 범위를 클립(clip)하는 것이 유리. Clipping은 일반적으로 원하는 범위를 입력하거나, 보존할 AOI를 지정하는 셰이프파일(shapefile)을 불러오는 방식으로 수행된다. 이 과정에서 지정한 범위 밖의 영역은 결과 클립 출력 파일에서 제거되며, AOI만 남게 된다. Clipping은 분석에 사용하지 않는 범위의 불필요한 부분을 제거하여 파일 크기를 줄이고, 이미지 처리 작업 속도를 높이는 데 도움이 된다.\n이번 lab에서 우리의 AOI는 옐로스톤 국립공원(Yellowstone National Park) 지역. 아래 이미지에서 볼 수 있듯이, 옐로스톤 공원의 면적은 Landsat 구역의 일부만 차지한다. 추가로 제공된 셰이프파일은 공원의 범위를 나타내며, 이를 사용해 Landsat 이미지를 클립할 수 있다. (Shapefile 다운로드)\n\n\n\n\n\n\nShapefiles\n\n\n\n\n\n\n\n\n5.1.3 Install the Semi-Automatic Classification Plugin in QGIS\nQGIS의 핵심 기능 중 하나는 플러그인을 설치할 수 있다는 점이다. 플러그인은 QGIS의 기능을 확장해주는 프로그램으로, 일부 플러그인은 QGIS에 기본으로 설치되어 있지만, 다른 플러그인은 별도로 다운로드하여 설치해야 한다. 위성 이미지 분류를 수행하기 위해 사용할 플러그인 중 하나는 Semi-Automatic Classification Plugin (SCP)이다.\nSCP는 (Luca, 2016)에 의해 개발된 QGIS의 무료 오픈소스 플러그인으로, 원격 탐사(remote sensing) 이미지의 반자동 분류(일명 지도 분류, supervised classification)를 수행할 수 있도록 지원함. SCP는 무료 위성 이미지 다운로드, 전처리(preprocessing), 후처리(postprocessing), 래스터 계산(raster calculation)을 위한 다양한 도구를 제공한다.\nSCP의 전체적인 목적은 Raster 처리를 위한 연계된 도구들을 제공하여 자동화된 워크플로우를 구현하고, 주된 전공이 원격 탐사가 아닌 사람들도 손쉽게 토지 피복 분류(land cover classification)를 수행할 수 있도록 돕는 것이다.\n\nQGIS에서 플러그인 &gt; 플러그인 관리 및 설치\n\n\n\n\n\n\n\n플러그인 창에서 검색창에 semi-automatic classification plugin을 입력, 목록에서 semi-automatic classification plugin을 선택한 후, 창의 오른쪽 하단에 있는 설치(Install) 버튼을 클릭.\n\n\n\n\n\n\n\n설치가 되면 아래와 같은 화면을 볼 수 있다.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Satellite Image Classification 2 (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_2.html#lab",
+    "href": "Satellite_2.html#lab",
+    "title": "5  Satellite Image Classification 2 (QGIS)",
+    "section": "5.2 Lab",
+    "text": "5.2 Lab\n\n5.2.1 Creating Band Set\n\nSemi-Automatic Classification Plugin에서 Landsat-9 이미지의 Band Set를 생성.\nSemi-Automatic Classification Plugin 도구 모음에서 버튼()을 클릭하여 플러그인을 실행:\n(만약 QGIS 화면 상단 근처에 Semi-Automatic Classification Plugin 도구 모음이 보이지 않는다면, 도구 모음 공간에서 마우스 오른쪽 버튼을 클릭한 후, Semi-Automatic Classification Plugin toolbar를 선택하여 활성화해야 함.)\n\n\n\n\n\n\n\nBand set을 선택하고, 이미지 불러오기 버튼()을 클릭하여 AOI의 밴드 데이터들을 불러온다.\n\n\n\n\n\n\n\nNOTE: 모든 밴드 데이터는 반드시 내림차순으로 정렬되어있어야 함.\n\n\n플러그인 창 하단에서, Band quick settings의 Wavelength는 Landsat 9 OLI [bands 1, 2, 3, 4, 5, 6, 7]로 설정, Band set tools은 Create raster of band set (stack bands) 체크 후, 우측 하단 RUN 클릭.\n\n\n\n\n\n\n\nRUN을 실행 후, 데이터 저장 위치 설정 요청은 해당 밴드 데이터 폴더에 그대로 저장.\n\n\n\n\n\n\n모든 밴드 데이터는 밴드 세트 1으로 다음과 같이 저장된다.\n\n밴드 세트 1 불러오기\nLayer - Add Layer - Add Raster Layer 순으로 불러오기\n\nRaster dataset(s)에 LC09_L1TP_038029_20230816_20230817_02_T1__stack_raster.tif 불러오기\n\n\n\n\n\n\n\n\nShapefile 불러오기\nLayer - Add Layer - Add Vector Layer\nVector Dataset(s)에 아래 Shapefile (AB67)의 모든 파일 업로드.\n\n\n\n\n\n\n\n\n\n\n\n\n\nAOI Clipping\n이제, 업로드한 Shapefile을 가지고 AOI를 clip한다.\n다시, 플러그인 버튼()을 클릭. Preprocessing탭의 Clip coordinates 항목에서 Use vector for clipping 체크. 그런 다음,  버튼을 눌러서 앞서 불러왔던 Shapefile 아래와 같이 불러오기. Use vector field for output name 은 AB67_ID 선택. RUN 선택.\n\n\n\nClip된 파일은 역시 같은 폴더에 저장.\n\nClipping이 완료되면, QGIS Layers에 자동 업로드 됨. 이전 Shapefile들과, 밴드 세트1 체크해제하면 아래와 같이 clipping된 AOI만 볼 수 있음.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Satellite Image Classification 2 (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_3.html",
+    "href": "Satellite_3.html",
+    "title": "6  Satellite Image Classification 3 (QGIS)",
+    "section": "",
+    "text": "6.1 Lab",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Satellite Image Classification 3 (QGIS)</span>"
+    ]
+  },
+  {
+    "objectID": "Satellite_3.html#lab",
+    "href": "Satellite_3.html#lab",
+    "title": "6  Satellite Image Classification 3 (QGIS)",
+    "section": "",
+    "text": "6.1.1 Define Band Set for Image Classification\n\nSCP (Semi-Automatic Classification Plugin, )을 클릭 후, 왼쪽 메뉴에서 Band set을 선택.\n아이콘을 클릭하여 잘라낸 반사율 이미지(clipped reflectance images)를 Single band list에 추가.\n버튼() 클릭하 우측에 있는 버튼 ()을 클릭하여 QGIS에 로드 되어있는 반사율 이미지를 불러온다.\n\n\n\nNOTE: 이때도 파일 순서를 오름차순으로 정렬할 것!\nBand quick settings는 이전과 마찬가지로 Landsat 9 OLI [bands 1, 2, 3, 4, 5, 6, 7]으로 설정.\n\n\n설정이 끝난 후, RUN버튼을 누르지 말고, 좌측 하단에 있는 RGB 버튼()을 클릭하여 QGIS의 Layers에 추가되도록 한다.\n\n\n\n\n\n\n\n생성된 Virtual Band Set 3를 클릭한 다음, 상단 RGB = 의 값을 4-3-2로 설정 후, 나머지 클립된 이미지들 체크 해제.\n\n\n\n\n\n\n선택한 밴드에 따라 지도에서 이미지 색상이 변하는 것을 아래와 같은 화면으로 확인할 수 있으며, 식생(vegetation)은 빨간색으로 강조되어 표시된다.\n\n\nVirtual Band Set 3를 사람 눈에 보이는 자연색(Natural Colors)으로 표시하려면, 다시 RGB 설정에서 밴드 3, 밴드 2, 밴드 1을 각각 (RGB = 3-2-1)로 설정. 이때,\n\n파란색(Blue) 파장은 레이어 1,\n녹색(Green) 파장은 레이어 2,\n빨간색(Red) 파장은 레이어 3에 해당.\n\n\n\n\n\n6.1.2 Image Classification\n이미지 분류(Image Classification)는 원격 탐사(Remote Sensing) 분석에서 흔히 사용되는 방법이다. 이미지 분류의 목적은 이미지를 구성하는 픽셀을 각 픽셀이 나타내는 토지 피복 유형(land cover type)에 따라 지정된 그룹으로 구분하는 것이다. 이를 위해 분류기(classifier) 알고리즘을 적용하여 픽셀을 반사율(reflectance) 값에 따라 그룹화.\n여기서 시도할 분류 방법은 지도 분류(supervised classification). 지도 분류는 분석가가 이미지에서 추출한 픽셀 샘플을 바탕으로 시스템에 분광(spectral) 클래스를 식별하도록 학습시키는 방식이다. 각 토지 피복 클래스마다 충분한 샘플이 사용되어야 하며, 각 클래스는 서로 분광적으로 구별 가능해야 한다. 즉, ‘숲’, ‘물’, ’도로’같은 클래스를 정했다면, 각 클래스를 대표하는 픽셀 샘플을 충분히 모아야 하며, 각 클래스의 픽셀이 특정 파장에서 반사하는 값(반사율, 여기서는 각 클래스 특징 색상)이 서로 달라야 한다.\n샘플은 각 클래스의 대표 픽셀을 포함하는 폴리곤을 생성하여 만들고, 해당 픽셀의 정보를 서명(signature)으로 불러와 저장합니다. 예를 들어, ‘숲’ 지역을 식별하려면 이미지에서 숲으로 보이는 부분을 선택하여 폴리곤을 생성합니다. 폴리곤 내부의 픽셀들은 다양한 파장에서 측정된 반사값을 가지고 있으며, 이러한 값들의 조합을 통해 해당 클래스의 서명(signature)이 만들어진다. 모든 토지 피복 클래스에 대한 샘플링이 완료되면, 파장(wavelength) 대 반사율(reflectance) 그래프에서 서명을 관찰하여 클래스 간 분리 가능성(separability)을 평가한다. 평가 결과에 따라 샘플을 조정해야 할 수도 있다. 이미지 분류의 최종 결과는 각 클래스에 해당하는 코드가 부여된 단일 밴드 래스터(single band raster) 이미지이다.\n\n6.1.2.1 Creating the Training Input\nSCP를 실행하면 QGIS 인터페이스의 왼쪽 하단 부분에서 Semi-Automatic Classification Dock을 찾을 수 있다 (빨간 네모).\n\n\n\n\n\n\n만약 보이지 않는다면, SCP 메인 툴바에서 Show Plugin(플러그인 표시) 메뉴를 클릭.\n\n\n\n\n\n\nSCP dock의 왼쪽에는 세로로 정렬된 텍스트 탭 3개가 있다: Home, Training Input, 그리고 Classification.\n\nTraining Input 클릭.\n\n\n\n\n\n\n\n새로운 Training Input을 만들기 위해, 버튼() 클릭.\n저장 위치는 이전과 동일한 위치로 설정. 여기서 파일명은 training.scp로 지정(파일명은 임의로 수정가능).\n\n\n\n\n\n\n\n생성한 training.scp는 QGIS의 Layers에 나타난걸 볼 수 있다.\n\n\n\n\n\n\n\n\n6.1.2.2 Create the Area of Interest (AOI)\n이제, 각 클래스(Class)와 매크로클래스(Macro-class)를 정의하는 ROI(Region of Interest, 관심 영역)를 생성할 것이다. 각 ROI는 클래스 ID(CID)로 식별되며, 각 ROI는 매크로클래스 ID(MCID)를 통해 특정 토지 피복 클래스(land cover class)에 할당된다.\n\n매크로클래스(Macro-class)는 비슷한 성질을 가진 여러 하위 클래스(클래스들)를 묶어놓은 큰 그룹.\n예를 들어:\nMacro-class ID (MCID): ‘산맥’\n\nClass 1 (CID 1): 나무\nClass 2 (CID 2): 그림자 진 숲\nClass 3 (CID 3): 협곡\n\n위의 class 1~3은 모두 Macro-class 즉, 산맥이라는 큰 그룹안에 포함된다.\n\n매크로클래스는 서로 다른 분광 서명(spectral signatures)을 가진 여러 재료(material)로 구성됩니다. 좋은 분류 결과를 얻기 위해서는 같은 매크로클래스에 속하더라도 서로 다른 재료의 분광 서명을 구분해야 합니다. 따라서, 각 매크로클래스마다 여러 개의 ROI를 생성할 것이며, 이때 동일한 MCID를 사용하되 각 관심 영역(AOI)마다 다른 CID를 부여하게 된다.\n이번 실습에서는 아래와 같은 Macro-class ID를 사용한다.\n\n\n\nMacro-class name\nMacroclass ID (MCID)\n\n\n\n\nVegetation\n1\n\n\nBare Rock\n2\n\n\nWater\n3\n\n\nSnow\n4\n\n\nCloud\n5\n\n\n\n\nROI(관심 영역)는 다각형을 수동으로 그리거나 자동 영역 확장(region growing) 알고리즘을 사용하여 생성할 수 있다.\n이미지의 왼쪽 하단에 있는 갈색 지역(노출된 암석 지대) 위로 지도를 확대 해보자.\n이 영역 안에 ROI를 수동으로 생성하려면, QGIS 상단 작업 툴바(Working toolbar)에 있는 버튼()을 클릭.\n\n\n추가적으로 맵을 이동할 때는 QGIS 상단 툴바에서 아이콘( )으로 전환해서 쉽게 이동가능.\n\n\n\n\n\n\n\n\n해당 영역에서 마우스 왼쪽 클릭하여 ROI(관심 영역)의 꼭지점(vertex)을 정의하고, 마지막 꼭지점을 정의할 때는 마우스 오른쪽 클릭하여 폴리곤을 닫는다. 이미지 위에는 주황색 반투명 폴리곤이 표시되며, 이것은 임시 폴리곤(Training input에 저장되지 않은 상태). 의도한 영역을 잘 커버할 때까지 임시 폴리곤을 여러 번 그릴 수 있으며, 이전에 그린 폴리곤은 새로 그릴 때마다 덮어쓰기 가능.\n\n\n임시 폴리곤의 모양이 만족스럽다면, 이를 Training input에 저장.\nTraining input 창을 열어 클래스(Class)와 매크로클래스(Macroclass)를 정의.\nROI Signature list에서 다음과 같이 설정한다 (MCID는 이전 테이블에서 참고):\n\nMC ID = 2\nMC Info = Bare rock\nC ID = 1\nC Info = Rock\n\n\n\n\n\n\n\n그런 다음, 오른쪽 하단에 있는 디스크 모양 버튼()을 클릭하여 ROI를 Training input에 저장. 몇 초 후, ROI가 상단의 ROI Signature list에 나타나며, Signature옵션이 선택된 상태였다면 분광 서명(spectral signature)이 자동으로 계산된다.\n\n저장된 ROI는 아래와 같이 검정색으로 변하고, CID를 보면, 자동으로 2로 설정된 것을 확인할 수 있다. MCID와는 다르게 CID는 자동으로 다음으로 숫자가 증가한다.\n\n\n\n\n\n\n\n이제 자동 영역 확장(automatic region growing) 알고리즘을 사용하여 물(water) 클래스에 대한 두 번째 ROI를 생성 해보자. 이미지의 중간 하단 영역을 확대하고, Working toolbar에서 Dist = 15로 설정.\n\n\n자동 영역 확장은 다음 버튼()을 통해 실행할 수 있다. 확장 버튼을 클릭한 후, 지도 중간 하단에 있는 검은색 호수를 클릭.\n\n\n\n\n\n\n해당 영역은 자동으로 비슷한 픽셀 값을 가진 영역을 선택 해주기 때문에, 매번 클릭할 때마다 랜덤으로 생성된다.\n\nROI Signature list에서 다음과 같이 설정하고, 저장:\n\nMC ID = 3\nMC Info = Water\nC ID = 1\nC Info = Lake\n\n\n\n\n\n\n각 Macro-class 별로 임의로 지정 해보자. 지정이 끝나면 아래와 같은 리스트를 얻게 된다.\n\n\n\n\n\n\n\n6.1.2.3 Assess the Spectral Signatures\n분광 서명(Spectral signatures)은 분류 알고리즘(Classification Algorithms)이 이미지 픽셀에 라벨을 지정할 때 사용된다. 그러나 서로 다른 재질(material)이라도 비슷한 분광 서명을 가질 수 있다(특히 다중분광 이미지(multispectral images)의 경우). 예를 들어, 도시 지역과 토양이 비슷한 분광 서명을 가질 수 있다.\n분류에 사용되는 분광 서명이 너무 유사하면, 알고리즘이 이를 올바르게 구분하지 못해 픽셀이 잘못 분류(misclassified)될 수 있기 때문에, 분광 거리(Spectral Distance)를 평가하여 유사한 분광 서명을 찾아 제거하는 것이 필요하다. 물론, 거리(distance)의 개념은 사용하는 분류 알고리즘에 따라 달라질 수 있다.\n\n분광 서명의 유사성을 간단히 평가하는 방법 중 하나는 Signature plot를 확인하는 것이다.\nSignature plot을 보려면, ROI Signature list에서 두 개 이상의 분광 서명을 클릭해 선택한 후, 버튼()을 클릭하면 된다.\n\n\n\n\n\n\n위에처럼 분광 서명을 클릭한 후,  클릭.\n\n\n\n\n\n\n그래프 내에서 이동하거나 확대/축소를 하여 서명들이 서로 유사한지(즉, 선이 매우 가깝게 위치하는지) 확인할 수 있다.\n그래프에 표시된 선의 색상을 변경하려면, Plot Signature list에서 해당 색상을 더블 클릭하면 된다.\n\n그래프에서 볼 수 있다시피, 분광 서명들이 서로 상당히 유사한 것을 알 수 있다. 이런 경우 분류가 잘 되지 않을 수 있다. (이상적인 분광서명 그래프는 아래와 같다.)\n\n\n\n\n\n그래프에서 각 서명의 선은 ROI Signature list에서 정의된 색상으로 표시되며, 각 밴드(band)의 분광 범위(최소값과 최대값)는 해당 서명의 선 색상과 동일한 반투명 영역으로 나타난다. 이 반투명 영역이 클수록 표준편차(standard deviation)가 크다는 의미이며, 이는 해당 서명을 구성하는 픽셀들의 이질성(heterogeneity)이 높다는 것을 의미한다.\n또한, 서로 유사한 분광 서명 간의 분광 유사도는 Plot Signature list에서 주황색으로 강조되어 표시되고, 서명 간의 Spectral distance를 계산할 수도 있다. 서명 간의 분광 거리를 계산하려면, Plot 테이블에서 두 개 이상의 분광 서명을 클릭하여 선택한다\u001d.\n\n\n\n\n\n위의 이미지는, 각 서명 쌍(pair of signatures)에 대해 거리가 계산된 결과이다. 이제 Spectral distances(분광 거리) 탭을 열어보면, 서명 간의 유사성이 선택한 알고리즘에 따라 다르게 나타나는 것을 확인할 수 있다.\n예를 들어, 두 개의 서명이 Spectral Angle Mapping에서는 매우 유사하게 나타날 수 있다 (매우 낮은 분광 각도). 그러나 Maximum Likelihood(최대 우도법)에서는 두 서명이 상당히 멀리 떨어져 있을 수도 있다 (Jeffries-Matusita 거리 값이 2에 가까운 경우).\n서명 간 유사성은 사용 가능한 분광 밴드의 수에 따라 재질(material) 간 유사성에 영향을 받으며, 또한 우리가 ROI를 생성하는 방식도 서명에 영향을 줍니다. 서명의 구체적인 값, 표준편차, ROI 픽셀 수 등과 같은 세부 정보는 Signature details 창에서 확인할 수 있다.\n\n\n\n\n\n\n\n6.1.2.4 Create a Classification Preview\n분류(classification) 과정은 수집한 ROI(관심 영역)와 해당 분광 서명(spectral signatures)에 기반한다.\n최종 분류를 실행하기 전에, 분류 미리보기(Classification preview)를 생성해 결과를 평가하는 것이 유용하다. 이렇게 하면 분광 서명의 영향을 파악할 수 있으며, 결과가 좋지 않은 경우 더 많은 ROI를 수집해 토지 피복(land cover)을 보다 정확하게 분류할 수 있다.\n\n분류(또는 미리보기)를 실행하기 전에, 분류 래스터(classification raster)에 표시될 각 토지 피복 클래스의 색상을 설정.\nROI Signature list에서 각 ROI의 Color 열을 더블 클릭해 각 클래스의 대표 색상을 선택.\n또한, Macroclasses 테이블에서도 매크로클래스의 색상을 설정 함. (각자 원하는 색상 지정)\n\n\n\n\n\n\n\n분류 알고리즘을 선택. 이번 lab에서는 Maximum Likelihood(최대 우도법)을 사용.\nSCP()를 실행하여, Classification을 클릭. Input에서 Select input band Set은 현재 사용중인 band set과 동일하게 해야함. (왼쪽 Layers에 있는 band set 3와 우측 Input에 있는 band set 3로 통일) RUN은 아직 클릭하지 않는다.\n\n\nClassification 창을 끈 다음, QGIS 상단 툴바에서 Classification preview() 의 Size = 300으로 설정하고, 분류 전에 결과를 미리 확인.\n\n\n\n\n\nSize = 300으로 설정한 후, 지도에서 한 지점을 클릭. 클릭하면, 클릭지점을 중심으로 정사각형 형태의 결과가 생성됨. 미리보기(preview)는 임시 래스터(temporary raster)로, QGIS를 종료하면 삭제되며, QGIS 패널의 Layers(레이어)에 scp_class_temp_group라는 그룹에 저장된다.\n\n\n\n\n\n이제 Macro-class를 나타내는 5가지 색상만 표시되는 것을 확인할 수 있다. 일반적으로, ROI(관심 영역)나 분광 서명(spectral signature)을 ROI Signature list에 추가할 때마다 분류 미리보기(classification preview)를 수행하는 것이 추천된다.\n따라서 ROI 생성(Create the ROIs) 단계와 분류 미리보기 생성(Create a Classification Preview) 단계는 반복적(iterative)이고 동시에 진행되는(concurrent) 과정이어야 함.\n\n\n6.1.2.5 Create the Classification Output\n분류 미리보기 결과가 만족스러웠다고 가정할 때(즉, 픽셀들이 ROI Signature list에 정의된 올바른 클래스에 할당된 경우), 이제 전체 이미지에 대한 실제 토지 피복 분류(land cover classification)를 수행 해보자.\n다시 Classification(분류) 탭으로 돌아가서, Using training을 Macro-class ID (MCID)를 체크, Classification output항목에서 버튼()을 클릭하여 분류 결과가 저장될 경로를 지정. 출력 파일은 래스터 파일(.tif) 형식으로 저장된다.\n\n\n\n\n\n분류 결과는 다음과 같이 볼 수 있다.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Satellite Image Classification 3 (QGIS)</span>"
+    ]
+  }
+]

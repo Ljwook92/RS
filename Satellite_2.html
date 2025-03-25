@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="J.I. Seo">
+<meta name="author" content="J.W. Lee">
+
+<title>5&nbsp; Satellite Image Classification 2 (QGIS) – Remote Sensing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Satellite_3.html" rel="next">
+<link href="./Satellite_1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Satellite_2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Remote Sensing</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Remote Sensing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Satellite Image Classification (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#download-qgis" id="toc-download-qgis" class="nav-link" data-scroll-target="#download-qgis"><span class="header-section-number">5.1.1</span> Download QGIS</a></li>
+  <li><a href="#clipping" id="toc-clipping" class="nav-link" data-scroll-target="#clipping"><span class="header-section-number">5.1.2</span> Clipping</a></li>
+  <li><a href="#install-the-semi-automatic-classification-plugin-in-qgis" id="toc-install-the-semi-automatic-classification-plugin-in-qgis" class="nav-link" data-scroll-target="#install-the-semi-automatic-classification-plugin-in-qgis"><span class="header-section-number">5.1.3</span> Install the Semi-Automatic Classification Plugin in QGIS</a></li>
+  </ul></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">5.2</span> Lab</a>
+  <ul class="collapse">
+  <li><a href="#creating-band-set" id="toc-creating-band-set" class="nav-link" data-scroll-target="#creating-band-set"><span class="header-section-number">5.2.1</span> Creating Band Set</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.I. Seo </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Gyeongguk National University
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.W. Lee </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
+<section id="download-qgis" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="download-qgis"><span class="header-section-number">5.1.1</span> Download QGIS</h3>
+<p>QGIS는 무료 오픈 소스 지리정보시스템(GIS) 소프트웨어로, 데이터를 시각화하고 관리·편집·분석하며 인쇄 가능한 지도를 제작할 수 있는 장점이 있다. Official Website: <a href="https://qgis.org" class="uri">https://qgis.org</a></p>
+<p><img src="images/Screenshot 2025-03-23 at 16.52.19.png" class="img-fluid" width="2000"></p>
+<p>여기서 각 OS에 맞게 <strong><code>Long Term Version</code></strong>을 다운로드.</p>
+</section>
+<section id="clipping" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="clipping"><span class="header-section-number">5.1.2</span> Clipping</h3>
+<p>Landsat의 범위는 관심 영역(Area of Interest, AOI)보다 더 클 수 있다. AOI에 집중하기 위해 범위를 클립(clip)하는 것이 유리. Clipping은 일반적으로 원하는 범위를 입력하거나, 보존할 AOI를 지정하는 셰이프파일(shapefile)을 불러오는 방식으로 수행된다. 이 과정에서 지정한 범위 밖의 영역은 결과 클립 출력 파일에서 제거되며, AOI만 남게 된다. Clipping은 분석에 사용하지 않는 범위의 불필요한 부분을 제거하여 파일 크기를 줄이고, 이미지 처리 작업 속도를 높이는 데 도움이 된다.</p>
+<p>이번 lab에서 우리의 AOI는 옐로스톤 국립공원(Yellowstone National Park) 지역. 아래 이미지에서 볼 수 있듯이, 옐로스톤 공원의 면적은 Landsat 구역의 일부만 차지한다. 추가로 제공된 셰이프파일은 공원의 범위를 나타내며, 이를 사용해 Landsat 이미지를 클립할 수 있다. (<a href="Data/AB67.zip">Shapefile 다운로드</a>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 17.09.12.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong>Shapefiles</strong></p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 19.14.46.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+</section>
+<section id="install-the-semi-automatic-classification-plugin-in-qgis" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="install-the-semi-automatic-classification-plugin-in-qgis"><span class="header-section-number">5.1.3</span> Install the Semi-Automatic Classification Plugin in QGIS</h3>
+<p>QGIS의 핵심 기능 중 하나는 플러그인을 설치할 수 있다는 점이다. 플러그인은 QGIS의 기능을 확장해주는 프로그램으로, 일부 플러그인은 QGIS에 기본으로 설치되어 있지만, 다른 플러그인은 별도로 다운로드하여 설치해야 한다. 위성 이미지 분류를 수행하기 위해 사용할 플러그인 중 하나는 <strong>Semi-Automatic Classification Plugin (SCP)</strong>이다.</p>
+<p><strong>SCP</strong>는 (Luca, 2016)에 의해 개발된 QGIS의 무료 오픈소스 플러그인으로, 원격 탐사(remote sensing) 이미지의 반자동 분류(일명 지도 분류, supervised classification)를 수행할 수 있도록 지원함. SCP는 무료 위성 이미지 다운로드, 전처리(preprocessing), 후처리(postprocessing), 래스터 계산(raster calculation)을 위한 다양한 도구를 제공한다.</p>
+<p>SCP의 전체적인 목적은 Raster 처리를 위한 연계된 도구들을 제공하여 자동화된 워크플로우를 구현하고, 주된 전공이 원격 탐사가 아닌 사람들도 손쉽게 토지 피복 분류(land cover classification)를 수행할 수 있도록 돕는 것이다.</p>
+<ol type="1">
+<li>QGIS에서 <strong>플러그인 &gt; 플러그인 관리 및 설치</strong></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 17.57.51.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="2" type="1">
+<li>플러그인 창에서 검색창에 <strong>semi-automatic classification plugin</strong>을 입력, 목록에서 <strong>semi-automatic classification plugin</strong>을 선택한 후, 창의 오른쪽 하단에 있는 <strong>설치(Install)</strong> 버튼을 클릭.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 17.59.36.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>설치가 되면 아래와 같은 화면을 볼 수 있다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 18.01.32.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="lab" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">5.2</span> Lab</h2>
+<section id="creating-band-set" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="creating-band-set"><span class="header-section-number">5.2.1</span> Creating Band Set</h3>
+<ol type="1">
+<li><p>Semi-Automatic Classification Plugin에서 Landsat-9 이미지의 Band Set를 생성.</p>
+<p><strong>Semi-Automatic Classification Plugin</strong> 도구 모음에서 버튼(<img src="images/Screenshot 2025-03-23 at 18.11.19.png" class="img-fluid" width="20">)을 클릭하여 플러그인을 실행:<br>
+(만약 QGIS 화면 상단 근처에 <strong>Semi-Automatic Classification Plugin</strong> 도구 모음이 보이지 않는다면, 도구 모음 공간에서 마우스 오른쪽 버튼을 클릭한 후, <strong>Semi-Automatic Classification Plugin toolbar</strong>를 선택하여 활성화해야 함.)</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 18.12.15.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1000"></p>
+</figure>
+</div>
+<ol start="2" type="1">
+<li><strong><code>Band set</code></strong>을 선택하고, 이미지 불러오기 버튼(<img src="images/Screenshot 2025-03-23 at 18.14.22.png" class="img-fluid" width="20">)을 클릭하여 AOI의 밴드 데이터들을 불러온다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 18.15.17.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> 모든 밴드 데이터는 반드시 내림차순으로 정렬되어있어야 함.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>플러그인 창 하단에서, <strong><code>Band quick settings</code></strong>의 <strong><code>Wavelength</code></strong>는 <strong>Landsat 9 OLI [bands 1, 2, 3, 4, 5, 6, 7]</strong>로 설정, <strong><code>Band set tools</code></strong>은 <strong>Create raster of band set (stack bands)</strong> 체크 후, 우측 하단 <strong><code>RUN</code></strong> 클릭.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 18.20.02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>RUN을 실행 후, 데이터 저장 위치 설정 요청은 해당 밴드 데이터 폴더에 그대로 저장.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 18.53.20.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<p>모든 밴드 데이터는 밴드 세트 1으로 다음과 같이 저장된다.</p>
+<ol start="4" type="1">
+<li><p>밴드 세트 1 불러오기</p>
+<p><strong><code>Layer</code></strong> - <strong><code>Add Layer</code></strong> - <strong><code>Add Raster Layer</code></strong> 순으로 불러오기</p>
+<p><img src="images/Screenshot 2025-03-23 at 19.05.07.png" class="img-fluid"></p>
+<p>Raster dataset(s)에 LC09_L1TP_038029_20230816_20230817_02_T1__stack_raster.tif 불러오기</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 19.13.19.png" class="img-fluid figure-img" width="500"></p>
+<figcaption><img src="images/Screenshot 2025-03-23 at 19.15.21.png" class="img-fluid figure-img"></figcaption>
+</figure>
+</div>
+<ol start="5" type="1">
+<li><p>Shapefile 불러오기</p>
+<p><strong><code>Layer</code></strong> - <strong><code>Add Layer</code></strong> - <strong><code>Add Vector Layer</code></strong></p>
+<p>Vector Dataset(s)에 아래 Shapefile (AB67)의 모든 파일 업로드.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 19.16.16.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-23 at 19.16.36.png" class="img-fluid figure-img" width="500"></p>
+<figcaption><img src="images/Screenshot 2025-03-23 at 19.18.56.png" class="img-fluid figure-img"></figcaption>
+</figure>
+</div>
+<ol start="6" type="1">
+<li><p>AOI Clipping</p>
+<p>이제, 업로드한 Shapefile을 가지고 AOI를 clip한다.</p>
+<p>다시, 플러그인 버튼(<img src="images/Screenshot 2025-03-23 at 19.20.35.png" class="img-fluid" width="20">)을 클릭. <strong><code>Preprocessing</code></strong>탭의 <strong><code>Clip coordinates</code></strong> 항목에서 Use vector for clipping 체크. 그런 다음, <img src="images/Screenshot 2025-03-23 at 19.22.25.png" class="img-fluid" width="20"> 버튼을 눌러서 앞서 불러왔던 Shapefile 아래와 같이 불러오기. <strong><code>Use vector field for output name</code></strong> 은 <strong>AB67_ID</strong> 선택. <strong><code>RUN</code></strong> 선택.</p></li>
+</ol>
+<p><img src="images/Screenshot 2025-03-23 at 19.21.13.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>Clip된 파일은 역시 같은 폴더에 저장.</p>
+</blockquote>
+<p>Clipping이 완료되면, QGIS Layers에 자동 업로드 됨. 이전 Shapefile들과, 밴드 세트1 체크해제하면 아래와 같이 clipping된 AOI만 볼 수 있음.</p>
+<p><img src="images/Screenshot 2025-03-23 at 19.26.03.png" class="img-fluid"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Satellite_1.html" class="pagination-link" aria-label="Satellite Image Classification (QGIS)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Satellite Image Classification (QGIS)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Satellite_3.html" class="pagination-link" aria-label="Satellite Image Classification 3 (QGIS)">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Data Science-Geospatial Lab, Jung-In Seo, Jeong-Wook Lee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Gyeongguk National University</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

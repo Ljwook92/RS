@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="J.I. Seo">
+<meta name="author" content="J.W. Lee">
+
+<title>2&nbsp; Giovanni: Climate Data 1 – Remote Sensing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Giovanni_2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Giovanni_1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Remote Sensing</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Remote Sensing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Giovanni_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Satellite Image Classification (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Satellite Image Classification 2 (QGIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Satellite_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Satellite Image Classification 3 (QGIS)</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">2.1</span> Introduction</a></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"><span class="header-section-number">2.2</span> Lab</a>
+  <ul class="collapse">
+  <li><a href="#case-studying-changes-in-no-2and-co-2concentrations-in-the-atmosphere-of-ukraine" id="toc-case-studying-changes-in-no-2and-co-2concentrations-in-the-atmosphere-of-ukraine" class="nav-link" data-scroll-target="#case-studying-changes-in-no-2and-co-2concentrations-in-the-atmosphere-of-ukraine"><span class="header-section-number">2.2.1</span> Case: Studying Changes in NO 2and CO 2Concentrations in the Atmosphere of Ukraine</a></li>
+  </ul></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">2.3</span> Practice</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 1</span></h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.I. Seo </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Gyeongguk National University
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">J.W. Lee </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
+<p><strong>Giovanni</strong>는 NASA<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 위성에서 수집한 지리 참조(geo-referenced) 데이터를 인터넷을 통해 직접 표시해주는 플랫폼.<br>
+손쉽게 NASA 위성의 다양한 기기에서 수집된 데이터를 면적 지도(area plots), 시계열(time series), 남북 평균(meridional averages), 동서 평균(zonal averages), 수직 프로파일(vertical profiles) 등 별도의 대용량 데이터 다운로드나 복잡한 프로그램 없이도 위성 관측 데이터를 다양한 형식으로 시각화하고 분석할 수 있음.</p>
+<p><img src="images/Screenshot 2025-03-20 at 10.56.22.png" class="img-fluid"></p>
+<p>예를들어, GIovanni는 사하라 먼지 폭풍(Saharan dust storm) 주변 환경에서 발생하는 현상부터 허리케인 카트리나(Hurricane Katrina)가 해양 표면의 엽록소 농도에 미친 영향까지 사용자가 폭넓게 분석할 수 있음. 또한 단일 매개변수(single parameter) 및 여러 매개변수(multiple parameters)를 선택하여 특정 시간대와 지역 범위에 걸쳐 그래프를 생성할 수 있음.</p>
+<p>데이터는 여러 인터페이스를 통해 접근 및 표시되며, 각 인터페이스에서는 하나 이상의 위성 기기에서 측정된 매개변수 시각화 가능. 사용 가능한 매개변수에는 강수량, 온도, 습도, 가스 농도 등등.</p>
+<p><strong>Key features:</strong></p>
+<ul>
+<li><p>대기 구성, 공기질, 강수량, 해양 색상, 지표 온도, 토양 수분 등 다양한 지구환경 데이터를 제공</p></li>
+<li><p>지도 시각화, 시계열 플롯, 산점도, 계절 평균 계산 등의 기능 시간 범위, 지리적 영역(박스 그리기), 변수 필터링 기능</p></li>
+<li><p>분석 결과를 이미지 또는 CSV 등으로 다운로드 가능</p></li>
+</ul>
+</section>
+<section id="lab" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">2.2</span> Lab</h2>
+<section id="case-studying-changes-in-no-2and-co-2concentrations-in-the-atmosphere-of-ukraine" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="case-studying-changes-in-no-2and-co-2concentrations-in-the-atmosphere-of-ukraine"><span class="header-section-number">2.2.1</span> Case: Studying Changes in NO 2and CO 2Concentrations in the Atmosphere of Ukraine</h3>
+<p><strong>이산화질소(NO₂)와 이산화탄소(CO₂)는 대기 중에 존재하는 무기 화합물로, 인체 건강에 해로운 영향을 미칠 수 있다.</strong> 이러한 물질의 배출원으로는 내연기관(내연 엔진), 화력 발전소, 공장 등이 있다.</p>
+<blockquote class="blockquote">
+<p>2020년 3월 말, <strong>ESA(the European Space Agency)</strong>은 2019년 평균 월별 농도와 비교했을 때&nbsp;<strong>파리, 로마, 마드리드</strong> 등 유럽 주요 도시에서 이산화질소 배출이 크게 감소했다는 데이터를 발표했다. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>중국에서는&nbsp;<strong>COVID-19 대유행이 절정에 달했을 때</strong>, 대기 중 유해 배출물이 <strong>이전 3년 같은 기간과 비교하여 20~30% 감소</strong>한 것으로 나타났다.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>또한, <strong>영국이 봉쇄 조치를 시행한 지 2주 후</strong>, 일부 도시에서&nbsp;<strong>이산화질소 오염이 2019년 같은 기간 대비 60% 감소</strong>했다.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+</blockquote>
+<p><strong>그렇다면 팬데믹은 우크라이나 대기 중 이산화질소 농도에 어떤 영향을 미쳤을까?</strong></p>
+<hr>
+<p><u><strong>Tasks to be performed in this lab:</strong></u></p>
+<ol type="1">
+<li><strong>Giovanni 서비스에 가입 및 로그인.</strong></li>
+<li><strong>2014년 6월 15일부터 2015년 6월 15일까지와 2019년 6월 15일부터 2020년 6월 15일까지의 우크라이나 대기 중 이산화질소(Nitrogen Dioxide) 평균 농도를 찾아 시각적으로 비교.</strong></li>
+<li><strong>Giovanni에서 제공하는 전체 기간 동안 우크라이나의 이산화탄소(Carbon Dioxide) 농도 변화를 그래프로 생성.</strong></li>
+</ol>
+<hr>
+<p>1. 회원가입 및 로그인. Official website: <a href="https://giovanni.gsfc.nasa.gov/giovanni/" class="uri">https://giovanni.gsfc.nasa.gov/giovanni/</a></p>
+<p>2. 날짜 선택 (년/월/일): <strong>Select Date Range (UTC)</strong>&nbsp;필드에서 프로그램이 평균 지도를 생성할 기간을 선택.</p>
+<p>(예: 2014년 6월 15일 – 2015년 6월 15일)</p>
+<p>3. 표시 형식 선택: <strong>Select Plot</strong>&nbsp;필드에서 표시 방법을 선택.<br>
+(예: <strong>Time-Averaged Map(시간 평균 지도)</strong>)</p>
+<p><img src="images/Screenshot 2025-03-20 at 11.33.40.png" class="img-fluid"></p>
+<p>4. 연구할 위치 선택: <strong>Select Region (Bounding Box or Shape)</strong> 필드에서 연구할 지역을 선택.</p>
+<blockquote class="blockquote">
+<p><code>Select Region</code>은 다양한 형태의 연구 지역을 처리 가능.</p>
+<ul>
+<li>국가의 행정 경계 내에서 설정,</li>
+<li>사용자가 지정한 사각형 또는 직사각형 형태로 설정.</li>
+</ul>
+<p>You can learn more about other ways of displaying information from the user guide.</p>
+</blockquote>
+<p>특정 지역의 데이터를 표시해야 할 경우,&nbsp;<strong>선택한 영역은 반드시 해당 지역을 포함하는 넓은 범위로 설정</strong>되어야 함. 지도는 <strong>마우스 휠</strong>&nbsp;또는&nbsp;<strong>“– +” 버튼</strong>을 사용해 확대/축소할 수 있으며, 아이콘 (<img src="images/Screenshot 2025-03-20 at 11.37.29.png" width="20" height="19">)을 사용하여 지도를 이동할 수도 있음.</p>
+<p><strong>도구 (</strong><img src="images/Screenshot 2025-03-20 at 11.39.00.png" width="20" height="19">) <strong>를 사용해 우크라이나 북부 지역 중 수도 키이우(Kyiv)를 포함하는 영토를 선택하기.</strong></p>
+<p><img src="images/Screenshot 2025-03-20 at 11.43.19.png" class="img-fluid"></p>
+<p>선택 후, <img src="images/Screenshot 2025-03-20 at 11.44.37.png" width="20" height="14"> 눌러서 나오기.</p>
+<p>5. <strong>조사할 변수를 선택 – 이산화질소(Nitrogen Dioxide; NO₂):</strong></p>
+<ol type="1">
+<li><p>좌측 <strong><code>Select Variables</code></strong> 패널에서 <strong>Atmospheric Chemistry(대기 화학)</strong> 를 선택.</p></li>
+<li><p>화면에 새로 나타나는 목록에서 <strong>NO₂ Tropospheric Column (30% Cloud Screened)</strong>를 선택하여 대류권 층 내의 이산화질소 농도를 표시.</p></li>
+<li><p>마지막으로 <strong><code>Plot Data</code></strong> 버튼을 클릭하여 데이터를 시각화.</p></li>
+</ol>
+<p><img src="images/Screenshot 2025-03-20 at 11.49.56.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> 이 데이터 세트에서&nbsp;<strong>이산화질소(NO₂) 농도는 분자 수/cm²(molecules/cm²)</strong>로 표시됨. 위성 센서는 <strong>위성 기기에서 지표면까지의 수직 기둥 내에 존재하는 분자 수를 지구 표면의 단위 면적당</strong> 추정함. 따라서 값이 <strong>molecules/cm²</strong> 단위로 제공됨.</p>
+</blockquote>
+<p><img src="images/Screenshot 2025-03-20 at 11.59.26.png" class="img-fluid"></p>
+<p><strong>5. 결과적으로, 선택한 지역의 평균(연간) 이산화질소 농도를 나타내는 지도를 얻음.</strong><br>
+그러나, 결과에서 알 수 있다시피, 지도에 표시된 값의 차이는 <strong>표준 이미지 분류(standard classification)</strong> 에서는 잘 드러나지 않음. 이유는 기호의 단계(gradation of symbols)가 자동으로 <strong>최대값을 2.00000005e+16</strong> 으로 설정하지만, 실제로 우리 지역의 데이터는 주로 <strong>0.50000005e+16</strong>&nbsp;범위에 해당하기 때문.</p>
+<p>즉, 최대 데이터 범위가 <strong>2.00000005e+16에서 0.50000005e+16</strong> 사이로 설정되어 있음.</p>
+<p><strong>이를 변경하기 위해, 다음과 같은 단계를 적용.</strong></p>
+<ol type="1">
+<li><p>우측 상단 <strong><code>Options</code></strong> 메뉴에서 <img src="images/Screenshot 2025-03-20 at 12.24.41.png" class="img-fluid" width="50">을 선택.</p></li>
+<li><p>최대 데이터 범위(Maximum data range)를 0.50000005e+16으로 설정.</p></li>
+<li><p>Smoothing(부드럽게 처리) 기능을 켜고,</p></li>
+<li><p>Re-Plot(다시 그리기) 를 클릭.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-20 at 12.08.43.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-20 at 12.10.34.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p><img src="images/Screenshot 2025-03-20 at 12.11.59.png" class="img-fluid"></p>
+<p>이 결과를 가지고, 선택한 지역의 평균(연간) 이산화질소(NO₂) 농도 지도를 확인할 수 있음.</p>
+<p><strong>이 지도는 Giovanni에 자동으로 저장되므로 따로 저장할 필요가 없음.</strong><br>
+다음 작업으로 진행하려면, 화면 오른쪽 하단에 있는 <strong>Back to Data Selection(데이터 선택으로 돌아가기)</strong> 버튼을 클릭.</p>
+<p>6. 동일한 방법(알고리즘)을 사용하여, <strong>2019년 6월 15일부터 2020년 6월 15일</strong>까지 같은 지역의 대류권 내 평균 이산화질소 농도를 확인하기. (결과는 아래와 같아야함)</p>
+<p><img src="images/Screenshot 2025-03-20 at 12.17.53.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><strong>결과 생각해보기.</strong></p>
+</blockquote>
+<ol type="1">
+<li><p><strong>2019-2020년의 이산화질소 농도는 2014-2015년 기간과 비교하여 왜, 그리고 어떻게 변화했을까?</strong></p></li>
+<li><p><strong>대기 중 이산화질소(NO₂) 농도의 이러한 변화는 환경에 어떤 영향을 미쳤을까?</strong></p></li>
+</ol>
+<p>이제 <strong>지구 온난화에 기여하는 가스인 이산화탄소(Carbon dioxide;</strong> <strong>CO₂)</strong>의 농도를 같은 지역에서 <strong>2002년부터 2017년까지</strong> 분석해 보자.</p>
+<blockquote class="blockquote">
+<p><strong>이산화탄소는 지구 기후 변화를 유발하는 주요 화합물 중 하나</strong>.</p>
+</blockquote>
+<p>Giovanni에서 제공되는 전체 기간 동안, 선택한 지역의 이산화탄소 농도가 어떻게 변화했는지 확인.</p>
+<ol type="1">
+<li><p>좌측 상단 <strong><code>Select Plot</code></strong> 필드에서 <strong>Time Series Area-Averaged(지역 평균 시계열)</strong> 표시 모드를 지정.<br>
+이 그래프는 선택한 기간 동안 평균값의 변화를 보여주는 표준 시계열 그래프로, 선택한 지역 내 이산화탄소 농도의 변화를 시각적으로 확인할 수 있음.</p>
+<p><img src="images/Screenshot 2025-03-20 at 12.31.23.png" class="img-fluid"></p></li>
+<li><p><strong>Atmospheric Chemistry(대기 화학)</strong> 패널에서 <strong>2002–2012년과 2010–2017년</strong> 동안의 이산화탄소 농도도 확인할 수 있음.</p></li>
+</ol>
+<p>(2002/09/01 - 2012/02/29)</p>
+<p><img src="images/Screenshot 2025-03-20 at 12.34.39.png" class="img-fluid"></p>
+<p>(2010/01/01 - 2017/02/28)</p>
+<p><img src="images/Screenshot 2025-03-20 at 12.36.59.png" class="img-fluid"></p>
+<p>따라서 서로 다른 기간(2002–2012년과 2010–2017년)의 CO₂ 농도를 <strong>두 개의 다른 그래프</strong>로 표시할 수 있음.</p>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> 2002 ~ 2017년까지의 이산화탄소 농도 변화를 한 번에 보고 싶지만, Giovanni에는 두 가지 다른 데이터셋으로 나뉨.</p>
+<ul>
+<li><p><strong>2002년부터 2012년</strong>까지의 데이터는 <strong>IR-Only</strong>(적외선 관측 기반) 데이터 없이 <strong>결합 관측(Combined Retrieval)</strong> 방식으로만 제공.</p></li>
+<li><p>반면, <strong>2010년부터 2017년</strong>까지의 데이터는 <strong>IR-Only</strong> 버전이 따로 제공.</p></li>
+</ul>
+<p>이렇게 나뉘는 이유는,</p>
+<ol type="1">
+<li><p>위성 관측 기술과 자료 처리 방식이 시간이 지나면서 발전.</p></li>
+<li><p>초기(2002–2012년)에는 IR과 다른 채널을 결합해 처리한 자료만 제공했지만,</p></li>
+<li><p>이후(2010년 이후)에는 <strong>적외선(IR) 채널만으로 분석한 고유한 자료(IR-Only)</strong>도 제공 시작.</p></li>
+</ol>
+<p>그래서 두 시기 데이터는 다른 형식으로 제공되며, 우리가 두 기간을 비교할 때는</p>
+<ul>
+<li><p>같은 지역에 대해 각각의 기간별로 별도로 그래프를 만들고</p></li>
+<li><p><strong>데이터의 처리 방식이 달랐음을 인지</strong>하고 비교해 보는 것이 중요.</p></li>
+</ul>
+</blockquote>
+<p><strong>Results:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-20 at 13.19.01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screenshot 2025-03-20 at 13.19.47.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>그래프는 <strong><code>Download</code> 버튼을 클릭</strong>하여 개별적으로 다운로드해 그림 파일로 저장할 수 있고, 또는 서로 다른 기간의 데이터를 장치에 다운로드한 후, <strong>R Studio 에서 공통 그래프를 직접 만들 수 있음.</strong></p>
+<p>이를 위해,</p>
+<ul>
+<li><p>화면 좌측의 <strong><code>History</code></strong> 탭에서 <strong><code>Downloads</code></strong> 항목 아래에 있는 <strong>CSV</strong>를 선택.</p></li>
+<li><p>두 기간의 데이터를 생성했기 때문에,&nbsp;<strong>두 개의 CSV 파일</strong>을 각각 다운 받아야 함.</p></li>
+</ul>
+<p><img src="images/Screenshot 2025-03-20 at 13.24.29.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"Data/"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern =</span> <span class="st">"52N</span><span class="sc">\\</span><span class="st">.csv$"</span>, <span class="co"># 파일명이 52N.csv로 끝나는 파일만</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(file_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Data//g4.areaAvgTimeSeries.AIRS3C2M_005_mole_fraction_of_carbon_dioxide_in_free_troposphere.20100101-20170228.21E_44N_40E_52N.csv"
+[2] "Data//g4.areaAvgTimeSeries.AIRX3C2M_005_mole_fraction_of_carbon_dioxide_in_free_troposphere.20020901-20120229.21E_44N_40E_52N.csv"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 파일 이름에서 변수명을 추출 후 각각 data_2002, data_2010 객체로 저장</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file <span class="cf">in</span> file_list) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 파일 이름에서 연도 추출 (4자리 숫자)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  year <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(file, <span class="fu">regexpr</span>(<span class="st">"20[0-9]{2}"</span>, file))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 변수명 생성</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  var_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"data_"</span>, year)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># CSV 파일을 9행부터 읽어오기</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(file, <span class="at">skip =</span> <span class="dv">8</span>) </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 두 번째 열 이름을 'carbon'으로 변경</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(df)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"carbon"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 해당 변수명으로 최종 할당</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(var_name, df)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_2002)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 time   carbon
+1 2002-09-01 00:00:00 371.1190
+2 2002-10-01 00:00:00 371.2208
+3 2002-11-01 00:00:00 372.1701
+4 2002-12-01 00:00:00 370.5606
+5 2003-01-01 00:00:00 373.6284
+6 2003-02-01 00:00:00 374.3577</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_2010)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 time   carbon
+1 2010-01-01 00:00:00 388.1938
+2 2010-02-01 00:00:00 389.6681
+3 2010-03-01 00:00:00 392.0399
+4 2010-04-01 00:00:00 392.7701
+5 2010-05-01 00:00:00 392.1530
+6 2010-06-01 00:00:00 392.1415</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data_2002는 2009-12-01 이전까지만 사용</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>data_2002_trim <span class="ot">&lt;-</span> data_2002 <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">as.Date</span>(time) <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2010-01-01"</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># data_2010은 2010-01-01부터 사용</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>data_2010_trim <span class="ot">&lt;-</span> data_2010 <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">as.Date</span>(time) <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2010-01-01"</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 두 데이터프레임 합치기</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>data_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(data_2002_trim, data_2010_trim)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># time 컬럼을 Date 형식으로 변환</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>data_combined<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(data_combined<span class="sc">$</span>time)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot으로 기본 라인 그래프 만들기</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_combined, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> carbon)) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Carbon Dioxide Concentration (Combined Data)"</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"CO2 (mole fraction)"</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-25c4080da17e55030527" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-25c4080da17e55030527">{"x":{"data":[{"x":[11931,11961,11992,12022,12053,12084,12112,12143,12173,12204,12234,12265,12296,12326,12357,12387,12418,12449,12478,12509,12539,12570,12600,12631,12662,12692,12723,12753,12784,12815,12843,12874,12904,12935,12965,12996,13027,13057,13088,13118,13149,13180,13208,13239,13269,13300,13330,13361,13392,13422,13453,13483,13514,13545,13573,13604,13634,13665,13695,13726,13757,13787,13818,13848,13879,13910,13939,13970,14000,14031,14061,14092,14123,14153,14184,14214,14245,14276,14304,14335,14365,14396,14426,14457,14488,14518,14549,14579,14610,14641,14669,14700,14730,14761,14791,14822,14853,14883,14914,14944,14975,15006,15034,15065,15095,15126,15156,15187,15218,15248,15279,15309,15340,15371,15400,15431,15461,15492,15522,15553,15584,15614,15645,15675,15706,15737,15765,15796,15826,15857,15887,15918,15949,15979,16010,16040,16071,16102,16130,16161,16191,16222,16252,16283,16314,16344,16375,16405,16436,16467,16495,16526,16556,16587,16617,16648,16679,16709,16740,16770,16801,16832,16861,16892,16922,16953,16983,17014,17045,17075,17106,17136,17167,17198],"y":[371.11898000000002,371.22081500000002,372.17008900000002,370.560588,373.62838299999999,374.35774199999997,375.71596699999998,378.90033299999999,377.82633199999998,377.239104,376.50022300000001,376.45637599999998,375.85361899999998,375.95664099999999,375.74697300000003,374.90971500000001,374.08544499999999,377.23235,378.41185400000001,379.16377,378.87643600000001,378.15299800000003,376.733521,376.22516999999999,376.53837099999998,376.49243100000001,377.06240600000001,377.86216000000002,378.61449699999997,377.88995699999998,377.83198900000002,381.37746800000002,380.79385400000001,379.71115400000002,379.67326100000002,379.52026000000001,379.67191700000001,379.813782,379.54413399999999,380.23140799999999,379.04673300000002,381.93159000000003,383.451031,384.73440199999999,383.401477,383.13894699999997,382.39364899999998,382.38918899999999,381.60307899999998,381.73252500000001,381.35801700000002,381.16942399999999,382.606405,382.60118999999997,384.95555100000001,385.64058,386.07884200000001,384.19616000000002,384.59240999999997,384.435767,384.142471,384.100324,383.66623499999997,383.76636400000001,384.67814399999997,384.223454,387.196461,388.93580100000003,387.15671099999997,386.87279699999999,386.25696199999999,386.03526900000003,385.30789199999998,385.52784000000003,385.04801400000002,386.25062700000001,387.014366,388.52844299999998,389.474448,390.22088000000002,389.10211900000002,388.47545200000002,388.33389899999997,387.28496899999999,387.66857900000002,387.73264999999998,388.03746999999998,389.65315099999998,388.19379400000003,389.66812599999997,392.03992,392.77011900000002,392.15297399999997,392.14149200000003,392.17694,391.50252499999999,391.38954799999999,391.366647,390.53241200000002,390.87829799999997,391.27288399999998,391.87375600000001,393.00186300000001,393.12516900000003,393.073081,393.544309,393.66935699999999,392.37758000000002,392.28644700000001,392.365928,391.81953099999998,392.85246100000001,392.76221199999998,393.88141899999999,394.60805199999999,395.79687799999999,396.23596199999997,395.92701899999997,395.62580400000002,394.89158400000002,394.46657699999997,394.410462,394.37741899999997,394.86192599999998,396.07116600000001,397.07033999999999,398.76033699999999,399.84018300000002,399.35099400000001,398.24400500000002,397.373065,396.27868599999999,396.50839000000002,396.55181299999998,396.56959899999998,397.84233399999999,396.81996800000002,398.12330400000002,399.515109,401.026815,400.01886999999999,398.430746,398.68814800000001,397.856492,398.30562099999997,398.59777800000001,399.163725,399.21256499999998,399.12331399999999,401.23894999999999,402.56192499999997,401.49613599999998,402.357663,402.36680799999999,400.36157400000002,399.88075900000001,400.36727000000002,401.16918500000003,400.26415700000001,400.16018700000001,400.40541300000001,401.513305,404.00088899999997,403.63024000000001,403.66564199999999,402.02599600000002,402.658749,404.16391599999997,402.94642900000002,403.93638099999998,402.17784899999998,402.910865,404.05600299999998,405.13606700000003],"text":["time: 2002-09-01<br />carbon: 371.1190","time: 2002-10-01<br />carbon: 371.2208","time: 2002-11-01<br />carbon: 372.1701","time: 2002-12-01<br />carbon: 370.5606","time: 2003-01-01<br />carbon: 373.6284","time: 2003-02-01<br />carbon: 374.3577","time: 2003-03-01<br />carbon: 375.7160","time: 2003-04-01<br />carbon: 378.9003","time: 2003-05-01<br />carbon: 377.8263","time: 2003-06-01<br />carbon: 377.2391","time: 2003-07-01<br />carbon: 376.5002","time: 2003-08-01<br />carbon: 376.4564","time: 2003-09-01<br />carbon: 375.8536","time: 2003-10-01<br />carbon: 375.9566","time: 2003-11-01<br />carbon: 375.7470","time: 2003-12-01<br />carbon: 374.9097","time: 2004-01-01<br />carbon: 374.0854","time: 2004-02-01<br />carbon: 377.2323","time: 2004-03-01<br />carbon: 378.4119","time: 2004-04-01<br />carbon: 379.1638","time: 2004-05-01<br />carbon: 378.8764","time: 2004-06-01<br />carbon: 378.1530","time: 2004-07-01<br />carbon: 376.7335","time: 2004-08-01<br />carbon: 376.2252","time: 2004-09-01<br />carbon: 376.5384","time: 2004-10-01<br />carbon: 376.4924","time: 2004-11-01<br />carbon: 377.0624","time: 2004-12-01<br />carbon: 377.8622","time: 2005-01-01<br />carbon: 378.6145","time: 2005-02-01<br />carbon: 377.8900","time: 2005-03-01<br />carbon: 377.8320","time: 2005-04-01<br />carbon: 381.3775","time: 2005-05-01<br />carbon: 380.7939","time: 2005-06-01<br />carbon: 379.7112","time: 2005-07-01<br />carbon: 379.6733","time: 2005-08-01<br />carbon: 379.5203","time: 2005-09-01<br />carbon: 379.6719","time: 2005-10-01<br />carbon: 379.8138","time: 2005-11-01<br />carbon: 379.5441","time: 2005-12-01<br />carbon: 380.2314","time: 2006-01-01<br />carbon: 379.0467","time: 2006-02-01<br />carbon: 381.9316","time: 2006-03-01<br />carbon: 383.4510","time: 2006-04-01<br />carbon: 384.7344","time: 2006-05-01<br />carbon: 383.4015","time: 2006-06-01<br />carbon: 383.1389","time: 2006-07-01<br />carbon: 382.3936","time: 2006-08-01<br />carbon: 382.3892","time: 2006-09-01<br />carbon: 381.6031","time: 2006-10-01<br />carbon: 381.7325","time: 2006-11-01<br />carbon: 381.3580","time: 2006-12-01<br />carbon: 381.1694","time: 2007-01-01<br />carbon: 382.6064","time: 2007-02-01<br />carbon: 382.6012","time: 2007-03-01<br />carbon: 384.9556","time: 2007-04-01<br />carbon: 385.6406","time: 2007-05-01<br />carbon: 386.0788","time: 2007-06-01<br />carbon: 384.1962","time: 2007-07-01<br />carbon: 384.5924","time: 2007-08-01<br />carbon: 384.4358","time: 2007-09-01<br />carbon: 384.1425","time: 2007-10-01<br />carbon: 384.1003","time: 2007-11-01<br />carbon: 383.6662","time: 2007-12-01<br />carbon: 383.7664","time: 2008-01-01<br />carbon: 384.6781","time: 2008-02-01<br />carbon: 384.2235","time: 2008-03-01<br />carbon: 387.1965","time: 2008-04-01<br />carbon: 388.9358","time: 2008-05-01<br />carbon: 387.1567","time: 2008-06-01<br />carbon: 386.8728","time: 2008-07-01<br />carbon: 386.2570","time: 2008-08-01<br />carbon: 386.0353","time: 2008-09-01<br />carbon: 385.3079","time: 2008-10-01<br />carbon: 385.5278","time: 2008-11-01<br />carbon: 385.0480","time: 2008-12-01<br />carbon: 386.2506","time: 2009-01-01<br />carbon: 387.0144","time: 2009-02-01<br />carbon: 388.5284","time: 2009-03-01<br />carbon: 389.4744","time: 2009-04-01<br />carbon: 390.2209","time: 2009-05-01<br />carbon: 389.1021","time: 2009-06-01<br />carbon: 388.4755","time: 2009-07-01<br />carbon: 388.3339","time: 2009-08-01<br />carbon: 387.2850","time: 2009-09-01<br />carbon: 387.6686","time: 2009-10-01<br />carbon: 387.7326","time: 2009-11-01<br />carbon: 388.0375","time: 2009-12-01<br />carbon: 389.6532","time: 2010-01-01<br />carbon: 388.1938","time: 2010-02-01<br />carbon: 389.6681","time: 2010-03-01<br />carbon: 392.0399","time: 2010-04-01<br />carbon: 392.7701","time: 2010-05-01<br />carbon: 392.1530","time: 2010-06-01<br />carbon: 392.1415","time: 2010-07-01<br />carbon: 392.1769","time: 2010-08-01<br />carbon: 391.5025","time: 2010-09-01<br />carbon: 391.3895","time: 2010-10-01<br />carbon: 391.3666","time: 2010-11-01<br />carbon: 390.5324","time: 2010-12-01<br />carbon: 390.8783","time: 2011-01-01<br />carbon: 391.2729","time: 2011-02-01<br />carbon: 391.8738","time: 2011-03-01<br />carbon: 393.0019","time: 2011-04-01<br />carbon: 393.1252","time: 2011-05-01<br />carbon: 393.0731","time: 2011-06-01<br />carbon: 393.5443","time: 2011-07-01<br />carbon: 393.6694","time: 2011-08-01<br />carbon: 392.3776","time: 2011-09-01<br />carbon: 392.2864","time: 2011-10-01<br />carbon: 392.3659","time: 2011-11-01<br />carbon: 391.8195","time: 2011-12-01<br />carbon: 392.8525","time: 2012-01-01<br />carbon: 392.7622","time: 2012-02-01<br />carbon: 393.8814","time: 2012-03-01<br />carbon: 394.6081","time: 2012-04-01<br />carbon: 395.7969","time: 2012-05-01<br />carbon: 396.2360","time: 2012-06-01<br />carbon: 395.9270","time: 2012-07-01<br />carbon: 395.6258","time: 2012-08-01<br />carbon: 394.8916","time: 2012-09-01<br />carbon: 394.4666","time: 2012-10-01<br />carbon: 394.4105","time: 2012-11-01<br />carbon: 394.3774","time: 2012-12-01<br />carbon: 394.8619","time: 2013-01-01<br />carbon: 396.0712","time: 2013-02-01<br />carbon: 397.0703","time: 2013-03-01<br />carbon: 398.7603","time: 2013-04-01<br />carbon: 399.8402","time: 2013-05-01<br />carbon: 399.3510","time: 2013-06-01<br />carbon: 398.2440","time: 2013-07-01<br />carbon: 397.3731","time: 2013-08-01<br />carbon: 396.2787","time: 2013-09-01<br />carbon: 396.5084","time: 2013-10-01<br />carbon: 396.5518","time: 2013-11-01<br />carbon: 396.5696","time: 2013-12-01<br />carbon: 397.8423","time: 2014-01-01<br />carbon: 396.8200","time: 2014-02-01<br />carbon: 398.1233","time: 2014-03-01<br />carbon: 399.5151","time: 2014-04-01<br />carbon: 401.0268","time: 2014-05-01<br />carbon: 400.0189","time: 2014-06-01<br />carbon: 398.4307","time: 2014-07-01<br />carbon: 398.6881","time: 2014-08-01<br />carbon: 397.8565","time: 2014-09-01<br />carbon: 398.3056","time: 2014-10-01<br />carbon: 398.5978","time: 2014-11-01<br />carbon: 399.1637","time: 2014-12-01<br />carbon: 399.2126","time: 2015-01-01<br />carbon: 399.1233","time: 2015-02-01<br />carbon: 401.2389","time: 2015-03-01<br />carbon: 402.5619","time: 2015-04-01<br />carbon: 401.4961","time: 2015-05-01<br />carbon: 402.3577","time: 2015-06-01<br />carbon: 402.3668","time: 2015-07-01<br />carbon: 400.3616","time: 2015-08-01<br />carbon: 399.8808","time: 2015-09-01<br />carbon: 400.3673","time: 2015-10-01<br />carbon: 401.1692","time: 2015-11-01<br />carbon: 400.2642","time: 2015-12-01<br />carbon: 400.1602","time: 2016-01-01<br />carbon: 400.4054","time: 2016-02-01<br />carbon: 401.5133","time: 2016-03-01<br />carbon: 404.0009","time: 2016-04-01<br />carbon: 403.6302","time: 2016-05-01<br />carbon: 403.6656","time: 2016-06-01<br />carbon: 402.0260","time: 2016-07-01<br />carbon: 402.6587","time: 2016-08-01<br />carbon: 404.1639","time: 2016-09-01<br />carbon: 402.9464","time: 2016-10-01<br />carbon: 403.9364","time: 2016-11-01<br />carbon: 402.1778","time: 2016-12-01<br />carbon: 402.9109","time: 2017-01-01<br />carbon: 404.0560","time: 2017-02-01<br />carbon: 405.1361"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":43.105022831050235},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Carbon Dioxide Concentration (Combined Data)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[11667.65,17461.349999999999],"tickmode":"array","ticktext":["2005","2010","2015"],"tickvals":[12784,14610,16436],"categoryorder":"array","categoryarray":["2005","2010","2015"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Date","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[368.83181404999999,406.86484095000003],"tickmode":"array","ticktext":["370","380","390","400"],"tickvals":[370,380,390,400],"categoryorder":"array","categoryarray":["370","380","390","400"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"CO2 (mole fraction)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"77e51545895":{"x":{},"y":{},"type":"scatter"}},"cur_data":"77e51545895","visdat":{"77e51545895":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>결과 생각해보기.</strong></p>
+</blockquote>
+<ol type="1">
+<li><p><strong>2002년부터 2017년까지 CO₂ 농도는 얼마나 증가했나?</strong></p></li>
+<li><p><strong>이 그래프는 어떤 추세를 보여주고 있나?</strong></p></li>
+<li><p><strong>2032년까지 이 지역의 CO₂ 농도 변화 추세를 예측해 보자.</strong></p></li>
+<li><p><strong>Giovanni에서 조사할 수 있는 다른 화학 화합물에는 무엇이 있을까?</strong></p></li>
+</ol>
+</section>
+</section>
+<section id="practice" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="practice"><span class="header-section-number">2.3</span> Practice</h2>
+<blockquote class="blockquote">
+<p><strong>글로벌 모니터링 연구소(Global Monitoring Laboratory)</strong><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>에 따르면, <strong>1980년 이후 전 세계 이산화탄소 농도는 지속적으로 증가</strong>하고 있다. 그렇다면, 위성 관측 데이터를 이용하여&nbsp;<strong>미국에서 이 오염물질 농도를 모니터링하는 것이 가능할까?</strong></p>
+<p><strong>읽은 내용과 COVID-19 ’대응’에 근거하여, 실습을 다시 수행하고 미국 동부 해안 도시(보스턴, 뉴욕, 워싱턴 DC 등)의 대기 중 NO₂ 및 CO₂ 농도 변화를 조사해 보세요.</strong></p>
+</blockquote>
+<ol type="1">
+<li><p><strong>직접 생성한 그래프 화면 캡처와 주석(설명)을 포함하여 분석 과정을 별도의 문서로 작성.</strong></p></li>
+<li><p><strong>여기에 본인의 해석을 반드시 포함할 것.</strong></p></li>
+</ol>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><a href="https://www.nasa.gov/learning-resources/for-educators/for-educators-grades-9-12/" class="uri">https://www.nasa.gov/learning-resources/for-educators/for-educators-grades-9-12/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-5P/Coronavirus_lockdown_leading_to_drop_in_pollution_across_Europe" class="uri">https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-5P/Coronavirus_lockdown_leading_to_drop_in_pollution_across_Europe</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-5P/COVID-19_nitrogen_dioxide_over_China" class="uri">https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-5P/COVID-19_nitrogen_dioxide_over_China</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://www.bbc.com/news/uk-england-52202974" class="uri">https://www.bbc.com/news/uk-england-52202974</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://gml.noaa.gov/ccgg/trends/global.html" class="uri">https://gml.noaa.gov/ccgg/trends/global.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Remote Sensing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Remote Sensing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Giovanni_2.html" class="pagination-link" aria-label="Giovanni: Climate Data 2">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Giovanni: Climate Data 2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Data Science-Geospatial Lab, Jung-In Seo, Jeong-Wook Lee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Gyeongguk National University</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
